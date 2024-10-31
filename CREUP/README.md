@@ -37,7 +37,7 @@ Esta es la lista del archivo correspondiente a la firma de cada cargo:
 ## ¿Cómo usar las firmas?
 
 > [!IMPORTANT]
-> Estas instrucciones se revisaron por última vez el 6 de julio de 2024, es posible que ya no sirvan.
+> Estas instrucciones se revisaron por última vez el 31 de octubre de 2024, es posible que ya no sirvan.
 
 Lo primero es descargar el archivo correspondiente a la firma que se quiere usar.
 
