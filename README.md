@@ -71,7 +71,7 @@ Y cuando no cargan, así:
 ## Cómo usar las firmas
 
 > [!IMPORTANT]
-> Estas instrucciones se revisaron por última vez el 31 de octubre de 2024, es posible que ya no sirvan.
+> Estas instrucciones se revisaron por última vez el 3 de febrero de 2025, es posible que ya no sirvan.
 
 ### En Thunderbird
 
@@ -211,6 +211,8 @@ Las pruebas no han sido muy exhaustivas, pero la firma en algunos sitios va bien
 :green_circle: Webmail
 
 :green_circle: Thunderbird
+
+:green_circle: Thunderbird móvil
 
 :yellow_circle: Outlook web
 

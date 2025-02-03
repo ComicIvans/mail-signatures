@@ -6,26 +6,25 @@ Aquí se encuentran las firmas para los correos de los distintos cargos de la or
 
 Esta es la lista del archivo correspondiente a la firma de cada cargo:
 
-| Cargo                                                                     | Archivo                |
-|------------------------------------------------------------------------------|-----------------------|
-| Presidente                                                                    | Firma Presidente.html |
-| Tesorero y Secretario                                                         | Firma TyS.html        |
-| Director Técnico y Digital                                                    | Firma Técnico.html    |
-| Directora de Actividades                                                      | Firma Actividades.html|
-| Directora de Diseño y Difusión                                                | Firma Diseño.html     |
-| Gestor de Apoyo a la búsqueda de financiación                                 | Firma Financiación.html|
-| Gestor de Apoyo logístico a los viajes y el transporte                        | Firma Transporte.html |
-| Gestor de Apoyo logístico al alojamiento y la manutención                     | Firma Alojamiento.html|
-| Gestor de Apoyo logístico al contacto con los ponentes                        | Firma Ponentes.html   |
-| Gestora de Apoyo a la difusión, el diseño y las redes sociales                 | Firma RRSS Julia.html |
-| Gestora de Apoyo a la difusión, el diseño y las redes sociales                 | Firma RRSS María.html |
-| Gestor de Apoyo al desarrollo de la web y la aplicación                       | Firma Web.html        |
-
+| Cargo                                                          | Archivo                 |
+| -------------------------------------------------------------- | ----------------------- |
+| Presidente                                                     | Firma Presidente.html   |
+| Tesorero y Secretario                                          | Firma TyS.html          |
+| Director Técnico y Digital                                     | Firma Técnico.html      |
+| Directora de Actividades                                       | Firma Actividades.html  |
+| Directora de Diseño y Difusión                                 | Firma Diseño.html       |
+| Gestor de Apoyo a la búsqueda de financiación                  | Firma Financiación.html |
+| Gestor de Apoyo logístico a los viajes y el transporte         | Firma Transporte.html   |
+| Gestor de Apoyo logístico al alojamiento y la manutención      | Firma Alojamiento.html  |
+| Gestor de Apoyo logístico al contacto con los ponentes         | Firma Ponentes.html     |
+| Gestora de Apoyo a la difusión, el diseño y las redes sociales | Firma RRSS Julia.html   |
+| Gestora de Apoyo a la difusión, el diseño y las redes sociales | Firma RRSS María.html   |
+| Gestor de Apoyo al desarrollo de la web y la aplicación        | Firma Web.html          |
 
 ## ¿Cómo usar las firmas?
 
 > [!IMPORTANT]
-> Estas instrucciones se revisaron por última vez el 29 de octubre de 2024, es posible que ya no sirvan.
+> Estas instrucciones se revisaron por última vez el 3 de febrero de 2025, es posible que ya no sirvan.
 
 Lo primero es descargar el archivo correspondiente a la firma que se quiere usar.
 
