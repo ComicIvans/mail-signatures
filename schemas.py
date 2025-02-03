@@ -23,6 +23,16 @@ S_CONFIG = Schema(
                 "alt": str,
             }
         ],
+        Optional("sponsor_text"): str,
+        Optional("sponsors"): [
+            {
+                "url": str,
+                "image": str,
+                "alt": str,
+                Optional("width"): str,
+                Optional("height"): str,
+            }
+        ],
         Optional("footer_address"): str,
         Optional("footer_text"): str,
     }

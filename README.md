@@ -152,6 +152,10 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
         "alt": ""
       }
     ],
+    "extra_img": {
+      "url": "",
+      "alt": ""
+    },
     "footer_address": "",
     "footer_text": ""
   }
@@ -175,6 +179,8 @@ Donde todas son obligatorias salvo las que se especifican como opcionales y sign
 - `opt_mail` _(OPCIONAL)_ es por si no hay número de teléfono y se quiere mostrar un segundo correo genérico.
 - `max_width` _(OPCIONAL)_ es por si se quiere limitar la longitud horizontal máxima de la firma para que si el nombre de la organización es demasiado largo se parta en varias líneas.
 - `links` _(OPCIONAL)_ es la lista de enlaces incluídos en la firma donde cada enlace tiene que ser un objeto con la URL `url`, el enlace a su imagen, `image` y el texto (o emoji) a mostrar si la imagen no carga, `alt`.
+- `sponsor_text` _(OPCIONAL)_ es el texto que aparecerá justo encima de las imágenes de los colaboradores.
+- `sponsors` _(OPCIONAL)_ es una lista de colaboradores con la imagen, el enlace y un texto alternativo. Además, se puede indicar el ancho y alto.
 - `footer_address` _(OPCIONAL)_ es una dirección postal para incluir al final de la firma.
 - `footer_text` _(OPCIONAL)_ es un texto para incluir al final de la firma, tras la dirección postal, si la hay.
 
@@ -200,7 +206,7 @@ Finalmente se pueden generar las firmas con `python3 generator.py`.
 
 ## Clientes de correo soportados
 
-Las pruebas no han sido muy exhaustivas, pero la firma en algunos sitios va bien :green_circle:, regulinchi _(se ve bien en general pero puede fallar en algún detalle)_ :yellow_circle: y mal :red_circle:. Esta es la lista:
+Las pruebas no han sido muy exhaustivas, pero la firma en algunos sitios va bien :green*circle:, regulinchi *(se ve bien en general pero puede fallar en algún detalle)\_ :yellow_circle: y mal :red_circle:. Esta es la lista:
 
 :green_circle: Webmail
 

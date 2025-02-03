@@ -169,6 +169,15 @@
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/be297f82940785e12bbd1d9a0fe6ad57ed61d52b/ENEM/img/Telegram.png",
         "alt": "💬"
       }
+    ],
+    "sponsor_text": "Con el apoyo de:",
+    "sponsors": [
+      {
+        "url": "https://aigranada.com/",
+        "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/ec2857ef59dd769330f41eab4b43095cfb1e1d17/ENEM/img/AIGranada.png",
+        "alt": "Fundación AI Granada Research & Innovation",
+        "width": "200px"
+      }
     ]
   },
   {
