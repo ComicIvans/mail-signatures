@@ -122,9 +122,7 @@ Simplemente porque pegando todo el contenido del archivo se pone un espacio en b
 
 ## Cómo usar el script
 
-> Instrucciones para Linux. Para Windows podrían variar ligeramente.
-
-Para generar firmas, primero hay que clonar o descargar este repositorio y es recomendable crear un entorno virtual con `python3 -m venv ./.env`, seleccionarlo e instalar [Jinja2](https://pypi.org/project/Jinja2/) con `pip install Jinja2 schema`.
+Para generar firmas, primero hay que clonar o descargar este repositorio y tener instalado [uv](https://github.com/astral-sh/uv).
 
 Lo primero que debes hacer es asegurarte de que tienes definida la configuración del tipo de firma en el archivo `signatures.json`. El archivo debe de seguir la siguiente estructura:
 
@@ -202,7 +200,7 @@ Es recomendable añadir la columna `output` para especificar el nombre del archi
 
 El resto de filas del CSV son los datos correspondientes a cada columna, siendo cada fila una firma a generar con dichos datos.
 
-Finalmente se pueden generar las firmas con `python3 generator.py`.
+Finalmente se pueden generar las firmas con `uv run main.py`.
 
 ## Clientes de correo soportados
 
