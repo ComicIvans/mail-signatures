@@ -74,6 +74,20 @@
         {%- endfor %}
       </div>
       {%- endif %}
+      {%- if supporter_text is defined %}
+      <div style="margin-bottom: 10px">
+        <p style="margin: 0; font-size: 12pt;">{{ supporter_text }}</p>
+      </div>
+      {%- endif %}
+      {%- if supporters is defined %}
+      <div style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; margin-bottom: 20px">
+        {%- for supporter in supporters %}
+        <a href="{{ supporter.url }}" style="color: inherit; text-decoration: none">
+          <img alt="{{ supporter.alt }}" moz-do-not-send="true" style="min-width: 120px; width: auto; height: auto; max-width: {% if max_width is defined %}{{ max_width }}px{% else %}none{% endif %}; {% if supporter.width is defined %}width: {{ supporter.width }};{% endif %} {% if supporter.height is defined %}height: {{ supporter.height }};{% endif %} display: flex; align-items: center; justify-content: center" src="{{ supporter.image }}" />
+        </a>
+        {%- endfor %}
+      </div>
+      {%- endif %}
       {%- if footer_address is defined or footer_text is defined %}
       <footer style="font-size: 8pt">
         {%- if footer_address is defined %}

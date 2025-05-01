@@ -33,6 +33,16 @@ S_CONFIG = Schema(
                 Optional("height"): str,
             }
         ],
+        Optional("supporter_text"): str,
+        Optional("supporters"): [
+            {
+                "url": str,
+                "image": str,
+                "alt": str,
+                Optional("width"): str,
+                Optional("height"): str,
+            }
+        ],
         Optional("footer_address"): str,
         Optional("footer_text"): str,
     }

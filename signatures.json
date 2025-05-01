@@ -171,13 +171,28 @@
         "alt": "💬"
       }
     ],
-    "sponsor_text": "Con el apoyo de:",
+    "sponsor_text": "Con la colaboración de:",
     "sponsors": [
+      {
+        "url": "https://www.ign.es/",
+        "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d8aa864c6ac196ab8a3b3e9983e9fca8c483ef3f/ENEM/img/IGN.png",
+        "alt": "Instituto Geográfico Nacional",
+        "height": "55.55px"
+      },
+      {
+        "url": "https://www.casio.com/",
+        "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d8aa864c6ac196ab8a3b3e9983e9fca8c483ef3f/ENEM/img/CASIO.png",
+        "alt": "CASIO",
+        "height": "55.55px"
+      }
+    ],
+    "supporter_text": "Con el apoyo de:",
+    "supporters": [
       {
         "url": "https://aigranada.com/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/fab68577c6a0fc519bd3524e8416ce271711202d/ENEM/img/AIGranada.png",
         "alt": "Fundación AI Granada Research & Innovation",
-        "width": "200px"
+        "height": "55.55px"
       }
     ]
   },
