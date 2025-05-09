@@ -34,6 +34,7 @@ Esta es la lista del archivo correspondiente a la firma de cada cargo:
 | Voluntario - Jorge Martínez Fernández                          | Firma Vol Jorge Martínez.html |
 | Voluntario - Jorge Merino Esteban                              | Firma Vol Jorge Merino.html   |
 | Voluntaria - Irene Fernández Ruiz                              | Firma Vol Irene.html          |
+| Voluntaria - Carlota Huerta Domingo                            | Firma Vol Carlota.html        |
 
 ## ¿Cómo usar las firmas?
 
