@@ -189,6 +189,12 @@
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d8aa864c6ac196ab8a3b3e9983e9fca8c483ef3f/ENEM/img/CASIO.png",
         "alt": "CASIO",
         "height": 55.55
+      },
+      {
+        "url": "https://www.cajaruralgranada.es/",
+        "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/2fcb4265707760e9ac518aa22fa3e0741cc68a80/ENEM/img/CRG.png",
+        "alt": "Caja Rural Granada",
+        "height": 55.55
       }
     ],
     "supporter_text": "Con el apoyo de:",
@@ -203,6 +209,12 @@
         "url": "https://aigranada.com/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/fab68577c6a0fc519bd3524e8416ce271711202d/ENEM/img/AIGranada.png",
         "alt": "Fundación AI Granada Research & Innovation",
+        "height": 55.55
+      },
+      {
+        "url": "https://www.parqueciencias.com/",
+        "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/2fcb4265707760e9ac518aa22fa3e0741cc68a80/ENEM/img/PC.png",
+        "alt": "Parque de las Ciencias de Andalucía",
         "height": 55.55
       }
     ]
