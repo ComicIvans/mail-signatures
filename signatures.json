@@ -182,13 +182,13 @@
         "url": "https://www.ign.es/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d8aa864c6ac196ab8a3b3e9983e9fca8c483ef3f/ENEM/img/IGN.png",
         "alt": "Instituto Geográfico Nacional",
-        "height": "55.55px"
+        "height": 55.55
       },
       {
         "url": "https://www.casio.com/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d8aa864c6ac196ab8a3b3e9983e9fca8c483ef3f/ENEM/img/CASIO.png",
         "alt": "CASIO",
-        "height": "55.55px"
+        "height": 55.55
       }
     ],
     "supporter_text": "Con el apoyo de:",
@@ -197,13 +197,13 @@
         "url": "https://ctgranada.es/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/5353e4993b16f2e4dea9d946f218b9faea7b8bb2/ENEM/img/CTG.png",
         "alt": "Círculo Tecnológico de Granada",
-        "height": "55.55px"
+        "height": 55.55
       },
       {
         "url": "https://aigranada.com/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/fab68577c6a0fc519bd3524e8416ce271711202d/ENEM/img/AIGranada.png",
         "alt": "Fundación AI Granada Research & Innovation",
-        "height": "55.55px"
+        "height": 55.55
       }
     ]
   },

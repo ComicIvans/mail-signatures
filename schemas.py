@@ -1,4 +1,4 @@
-from schema import Schema, Optional, And
+from schema import Schema, Optional, And, Or
 
 S_CONFIG = Schema(
     {
@@ -15,7 +15,7 @@ S_CONFIG = Schema(
         Optional("phone_country_code"): str,
         Optional("internal_phone"): str,
         Optional("opt_mail"): str,
-        Optional("max_width"): int,
+        Optional("max_width"): Or(int, float),
         Optional("links"): [
             {
                 "url": str,
@@ -29,8 +29,8 @@ S_CONFIG = Schema(
                 "url": str,
                 "image": str,
                 "alt": str,
-                Optional("width"): str,
-                Optional("height"): str,
+                Optional("width"): Or(int, float),
+                Optional("height"): Or(int, float),
             }
         ],
         Optional("supporter_text"): str,
@@ -39,8 +39,8 @@ S_CONFIG = Schema(
                 "url": str,
                 "image": str,
                 "alt": str,
-                Optional("width"): str,
-                Optional("height"): str,
+                Optional("width"): Or(int, float),
+                Optional("height"): Or(int, float),
             }
         ],
         Optional("footer_address"): str,

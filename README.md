@@ -155,16 +155,16 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
       "url": "",
       "image": "",
       "alt": "",
-      "width": "",
-      "height": ""
+      "width": 0,
+      "height": 0
     },
     "supporter_text": "",
     "supporters": {
       "url": "",
       "image": "",
       "alt": "",
-      "width": "",
-      "height": ""
+      "width": 0,
+      "height": 0
     },
     "footer_address": "",
     "footer_text": ""
