@@ -66,11 +66,11 @@
       </div>
       {%- endif %}
       {%- if sponsors is defined %}
-      <div style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; margin-bottom: 20px">
+      <div style="display: flex; flex-direction: row; gap: 5px; flex-wrap: wrap; margin-bottom: 20px">
         {%- for sponsor in sponsors %}
         <a href="{{ sponsor.url }}" style="color: inherit; text-decoration: none">
           <img alt="{{ sponsor.alt }}" moz-do-not-send="true" style="max-width: {% if max_width is defined %}{{ max_width }}px{% else %}none{% endif %}; width: {% if sponsor.width is defined %}{{ sponsor.width }}px{% else %}auto{% endif %}; height: {% if sponsor.height is defined %}{{ sponsor.height }}px{% else %}auto{% endif %}; display: flex; align-items: center; justify-content: center" {% if sponsor.width is defined %}width="{{ sponsor.width }}"{% endif %} {% if sponsor.height is defined %}height="{{ sponsor.height }}"{% endif %} src="{{ sponsor.image }}" />
-        </a>
+        </a>&nbsp;
         {%- endfor %}
       </div>
       {%- endif %}
@@ -80,11 +80,11 @@
       </div>
       {%- endif %}
       {%- if supporters is defined %}
-      <div style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; margin-bottom: 20px">
+      <div style="display: flex; flex-direction: row; gap: 5px; flex-wrap: wrap; margin-bottom: 20px">
         {%- for supporter in supporters %}
         <a href="{{ supporter.url }}" style="color: inherit; text-decoration: none">
           <img alt="{{ supporter.alt }}" moz-do-not-send="true" style="max-width: {% if max_width is defined %}{{ max_width }}px{% else %}none{% endif %}; width: {% if supporter.width is defined %}{{ supporter.width }}px{% else %}auto{% endif %}; height: {% if supporter.height is defined %}{{ supporter.height }}px{% else %}auto{% endif %}; display: flex; align-items: center; justify-content: center" {% if supporter.width is defined %}width="{{ supporter.width }}"{% endif %} {% if supporter.height is defined %}height="{{ supporter.height }}"{% endif %} src="{{ supporter.image }}" />
-        </a>
+        </a>&nbsp;
         {%- endfor %}
       </div>
       {%- endif %}
