@@ -6,37 +6,38 @@ Aquí se encuentran las firmas para los correos de los distintos cargos de la Co
 
 Esta es la lista del archivo correspondiente a la firma de cada cargo:
 
-| Cargo                                            | Archivo          |
-| ------------------------------------------------ | ---------------- |
-| Presidencia                                      | Presidencia.html |
-| Secretaría                                       | Secretaría.html  |
-| Tesorería                                        | Tesorería.html   |
-| Vicepresidencia de Relaciones Institucionales    | VPRI.html        |
-| Vicepresidencia de Política Universitaria        | VPPU.html        |
-| Vicepresidencia de Organización                  | VPO.html         |
-| Dirección de Comunicación                        | DIRCOM.html      |
-| Vocalía de Relaciones Internacionales            | VRI.html         |
-| Vocalía de Igualdad y Cooperación al Desarrollo  | VICD.html        |
-| Vocalía de Digitalización y Transparencia        | VDT.html         |
-| Vocalía de Proyectos                             | VP.html          |
-| Vocalía de Formación y Contacto con los Miembros | VFCM.html        |
-| Vocalía de Logística                             | VL.html          |
-| Vocalía de Política Universitaria                | VPU.html         |
-| Vocalía de Vida Universitaria                    | VVU.html         |
-| Vocalía de Garantía de la Calidad                | VGC.html         |
-| Vocalía de Diseño de Contenido                   | VDC.html         |
-| Vocalía de Redes Sociales                        | VRS.html         |
-| Vocalía de Producción Audiovisual                | VPA.html         |
-| Vocalía de Incidencia Política                   | VIP.html         |
-| Coordinación del Comité de Garantías             | CG.html          |
-| Secretaría del Comité de Garantías               | SG.html          |
-| Coordinación del Comité de Asuntos Sectoriales   | CCAS.html        |
-| Secretaría del Comité de Asuntos Sectoriales     | SCAS.html        |
+| Cargo                                              | Archivo          |
+| -------------------------------------------------- | ---------------- |
+| Presidencia                                        | Presidencia.html |
+| Secretaría                                         | Secretaría.html  |
+| Tesorería                                          | Tesorería.html   |
+| Vicepresidencia de Relaciones Institucionales      | VPRI.html        |
+| Vicepresidencia de Política Universitaria          | VPPU.html        |
+| Vicepresidencia de Organización                    | VPO.html         |
+| Dirección de Comunicación                          | DIRCOM.html      |
+| Vocalía de Relaciones Internacionales              | VRI.html         |
+| Vocalía de Igualdad y Cooperación al Desarrollo    | VICD.html        |
+| Vocalía de Digitalización y Transparencia          | VDT.html         |
+| Vocalía de Proyectos                               | VP.html          |
+| Vocalía de Formación y Contacto con los Miembros   | VFCM.html        |
+| Vocalía de Logística                               | VL.html          |
+| Vocalía de Política Universitaria                  | VPU.html         |
+| Vocalía de Vida Universitaria                      | VVU.html         |
+| Vocalía de Garantía de la Calidad                  | VGC.html         |
+| Vocalía de Diseño de Contenido                     | VDC.html         |
+| Vocalía de Redes Sociales                          | VRS.html         |
+| Vocalía de Producción Audiovisual                  | VPA.html         |
+| Vocalía de Incidencia Política                     | VIP.html         |
+| Coordinación del Comité de Garantías               | CG.html          |
+| Secretaría del Comité de Garantías                 | SG.html          |
+| Coordinación del Comité de Asuntos Sectoriales     | CCAS.html        |
+| Secretaría del Comité de Asuntos Sectoriales       | SCAS.html        |
+| Coordinación del Comité de Asuntos Internacionales | CCAI.html        |
 
 ## ¿Cómo usar las firmas?
 
 > [!IMPORTANT]
-> Estas instrucciones se revisaron por última vez el 5 de mayo de 2025, es posible que ya no sirvan.
+> Estas instrucciones se revisaron por última vez el 3 de septiembre de 2025, es posible que ya no sirvan.
 
 Lo primero es descargar el archivo correspondiente a la firma que se quiere usar.
 
