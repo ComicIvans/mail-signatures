@@ -6,21 +6,9 @@ Firmas de correo electrónico generadas automáticamente para Delegación Genera
 
 ## Lista de firmas
 
-| Cargo                                       | Archivo                   |
-| ------------------------------------------- | ------------------------- |
-| Coordinador General de Estudiantes          | Firma Coordinador.html    |
-| Vicecoordinador Ejecutivo                   | Firma Ejecutivo.html      |
-| Secretaria                                  | Firma Secretaria.html     |
-| Vicesecretario                              | Firma Vicesecretario.html |
-| Tesorera                                    | Firma Tesorera.html       |
-| Vicecoordinador Académico                   | Firma Académico.html      |
-| Vicecoordinadora de Extensión Universitaria | Firma Extensión.html      |
-| Vicecoordinadora de Igualdad                | Firma Igualdad.html       |
-| Vicecoordinadora de Inclusión               | Firma Inclusión.html      |
-| Vicecoordinadora de Salud y Bienestar       | Firma Salud.html          |
-| Directora del Gabinete del Coordinador      | Firma DirGab.html         |
-| Responsable de sede                         | Firma Alba.html           |
-| Responsable de sede                         | Firma Genérica.html       |
+| Cargo  | Archivo         |
+| ------ | --------------- |
+| Tester | Firma Test.html |
 
 ## ¿Cómo usar las firmas?
 

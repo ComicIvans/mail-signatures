@@ -27,23 +27,6 @@ Las firmas partieron de una base que supongo que será de @jesusjmma y, actualme
 
 ---
 
-## Accesibilidad
-
-Las firmas incluyen varias características para mejorar la accesibilidad:
-
-| Característica         | Descripción                                                                                                 |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `role="presentation"`  | Las tablas usadas para maquetación se marcan como decorativas para que los lectores de pantalla las ignoren |
-| `aria-hidden="true"`   | Los elementos decorativos (barras de color, iconos dentro de enlaces) se ocultan a lectores de pantalla     |
-| `aria-label`           | Los enlaces con iconos usan `description` como etiqueta accesible descriptiva                               |
-| `alt` en imágenes      | Todas las imágenes tienen texto alternativo (emoji por defecto: 👤, 🌐, etc.)                                 |
-| `title` en enlaces     | Los enlaces muestran tooltip con la descripción al pasar el ratón                                           |
-| `role="img"` en avatar | La imagen del avatar/logo se marca explícitamente como imagen semántica                                     |
-
-> **Tip:** Para una accesibilidad óptima, configura `alt` (emoji o texto corto) y `description` (texto descriptivo completo) en los enlaces e imágenes.
-
----
-
 ## Ejemplos de firmas
 
 A continuación hay unas capturas de cómo se deberían de ver las firmas.
@@ -346,6 +329,21 @@ Name,Position,Mail,Output,Phone,internal_phone
 Ana García,Presidenta,presidencia@ejemplo.es,Firma Presidenta,123 456 789,12345
 Juan López,Secretario,secretaria@ejemplo.es,Firma Secretario,,None
 ```
+
+## Accesibilidad
+
+Las firmas incluyen varias características para mejorar la accesibilidad:
+
+| Característica         | Descripción                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `role="presentation"`  | Las tablas usadas para maquetación se marcan como decorativas para que los lectores de pantalla las ignoren |
+| `aria-hidden="true"`   | Los elementos decorativos (barras de color, iconos dentro de enlaces) se ocultan a lectores de pantalla     |
+| `aria-label`           | Los enlaces con iconos usan `description` como etiqueta accesible descriptiva                               |
+| `alt` en imágenes      | Todas las imágenes tienen texto alternativo (emoji por defecto: 👤, 🌐, etc.)                                 |
+| `title` en enlaces     | Los enlaces muestran tooltip con la descripción al pasar el ratón                                           |
+| `role="img"` en avatar | La imagen del avatar/logo se marca explícitamente como imagen semántica                                     |
+
+> **Tip:** Para una accesibilidad óptima, configura `alt` (emoji o texto corto) y `description` (texto descriptivo completo) en los enlaces e imágenes.
 
 ## Clientes de correo soportados
 
