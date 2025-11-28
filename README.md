@@ -83,9 +83,6 @@ Y cuando no cargan, así:
 
 ## Cómo usar las firmas
 
-> [!IMPORTANT]
-> Estas instrucciones se revisaron por última vez el 3 de febrero de 2025, es posible que ya no sirvan.
-
 ### En Thunderbird
 
 Simplemente hay que irse a la configuración de la cuenta, marcar la casilla de utilizar un archivo como firma y seleccionar el archivo de firma descargado:
