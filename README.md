@@ -23,6 +23,24 @@ Las firmas partieron de una base que supongo que será de @jesusjmma y, actualme
 - ✅ Previsualización de firmas generadas
 - ✅ Compatibilidad mejorada con clientes de correo (uso de tablas HTML)
 - ✅ Macros reutilizables para componentes comunes
+- ✅ Accesibilidad mejorada (ARIA, textos alternativos, semántica)
+
+---
+
+## Accesibilidad
+
+Las firmas incluyen varias características para mejorar la accesibilidad:
+
+| Característica         | Descripción                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `role="presentation"`  | Las tablas usadas para maquetación se marcan como decorativas para que los lectores de pantalla las ignoren |
+| `aria-hidden="true"`   | Los elementos decorativos (barras de color, iconos dentro de enlaces) se ocultan a lectores de pantalla     |
+| `aria-label`           | Los enlaces con iconos usan `description` como etiqueta accesible descriptiva                               |
+| `alt` en imágenes      | Todas las imágenes tienen texto alternativo (emoji por defecto: 👤, 🌐, etc.)                                 |
+| `title` en enlaces     | Los enlaces muestran tooltip con la descripción al pasar el ratón                                           |
+| `role="img"` en avatar | La imagen del avatar/logo se marca explícitamente como imagen semántica                                     |
+
+> **Tip:** Para una accesibilidad óptima, configura `alt` (emoji o texto corto) y `description` (texto descriptivo completo) en los enlaces e imágenes.
 
 ---
 
@@ -200,7 +218,8 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
       {
         "url": "https://ejemplo.es",
         "image": "https://example.com/web-icon.png",
-        "alt": "🌐"
+        "alt": "🌐",
+        "description": "Sitio web de ejemplo"
       }
     ],
     "sponsor_text": "Con la colaboración de:",
@@ -209,6 +228,7 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
         "url": "https://sponsor.com",
         "image": "https://sponsor.com/logo.png",
         "alt": "Sponsor",
+        "description": "Patrocinador principal",
         "width": 100,
         "height": 50
       }
@@ -219,6 +239,7 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
         "url": "https://supporter.com",
         "image": "https://supporter.com/logo.png",
         "alt": "Supporter",
+        "description": "Colaborador",
         "height": 55
       }
     ],
@@ -230,29 +251,66 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
 
 ### Campos de configuración
 
-| Campo                | Obligatorio | Descripción                                       |
-| -------------------- | ----------- | ------------------------------------------------- |
-| `id`                 | ✅           | Identificador de la configuración                 |
-| `template`           | ✅           | Plantilla a usar: `original` o `wide-logo`        |
-| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)          |
-| `main_font`          | ✅           | Fuente principal del texto                        |
-| `name_font`          | ✅           | Fuente del nombre de la persona                   |
-| `name_image`         | ✅           | URL de la imagen/logo (debe ser una URL válida)   |
-| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                 |
-| `organization`       | ✅           | Nombre de la organización                         |
-| `organization_extra` | ❌           | Organización superior/adicional                   |
-| `phone`              | ❌           | Número de teléfono (sin código de país)           |
-| `phone_country_code` | ❌           | Código de país (ej: `+34`)                        |
-| `internal_phone`     | ❌           | Extensión interna                                 |
-| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono) |
-| `max_width`          | ❌           | Ancho máximo en píxeles                           |
-| `links`              | ❌           | Lista de enlaces sociales                         |
-| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                    |
-| `sponsors`           | ❌           | Lista de patrocinadores                           |
-| `supporter_text`     | ❌           | Texto sobre los colaboradores                     |
-| `supporters`         | ❌           | Lista de colaboradores                            |
-| `footer_address`     | ❌           | Dirección postal                                  |
-| `footer_text`        | ❌           | Texto legal del footer                            |
+| Campo                | Obligatorio | Descripción                                                  |
+| -------------------- | ----------- | ------------------------------------------------------------ |
+| `id`                 | ✅           | Identificador de la configuración                            |
+| `template`           | ✅           | Plantilla a usar: `original` o `wide-logo`                   |
+| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)                     |
+| `main_font`          | ✅           | Fuente principal del texto                                   |
+| `name_font`          | ✅           | Fuente del nombre de la persona                              |
+| `name_image`         | ✅           | URL o objeto `{image, url?, alt?, description?}` (ver abajo) |
+| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                            |
+| `organization`       | ✅           | Nombre de la organización                                    |
+| `organization_extra` | ❌           | Organización superior/adicional                              |
+| `phone`              | ❌           | Número de teléfono (sin código de país)                      |
+| `phone_country_code` | ❌           | Código de país (ej: `+34`)                                   |
+| `internal_phone`     | ❌           | Extensión interna                                            |
+| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono)            |
+| `max_width`          | ❌           | Ancho máximo en píxeles                                      |
+| `links`              | ❌           | Lista de enlaces sociales                                    |
+| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                               |
+| `sponsors`           | ❌           | Lista de patrocinadores                                      |
+| `supporter_text`     | ❌           | Texto sobre los colaboradores                                |
+| `supporters`         | ❌           | Lista de colaboradores                                       |
+| `footer_address`     | ❌           | Dirección postal                                             |
+| `footer_text`        | ❌           | Texto legal del footer                                       |
+
+#### Formato de `name_image`
+
+Puede ser una URL simple o un objeto:
+
+```json
+// URL simple (retrocompatible)
+"name_image": "https://example.com/logo.png"
+
+// Objeto con más opciones
+"name_image": {
+  "image": "https://example.com/logo.png",
+  "url": "https://example.com",
+  "alt": "Logo",
+  "description": "Ir al sitio web"
+}
+```
+
+#### Formato de `links`
+
+| Campo         | Obligatorio | Descripción                                |
+| ------------- | ----------- | ------------------------------------------ |
+| `url`         | ✅           | URL del enlace                             |
+| `image`       | ✅           | URL del icono                              |
+| `alt`         | ❌           | Texto alternativo (emoji recomendado)      |
+| `description` | ❌           | Descripción (se usa en title y aria-label) |
+
+#### Formato de `sponsors` y `supporters`
+
+| Campo         | Obligatorio | Descripción                                |
+| ------------- | ----------- | ------------------------------------------ |
+| `url`         | ❌           | URL del enlace (si no hay, no es clicable) |
+| `image`       | ✅           | URL del logo                               |
+| `alt`         | ❌           | Texto alternativo                          |
+| `description` | ❌           | Descripción (se usa en title y aria-label) |
+| `width`       | ❌           | Ancho en píxeles                           |
+| `height`      | ❌           | Alto en píxeles                            |
 
 ### Plantillas disponibles
 
@@ -263,7 +321,7 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
 
 ### Lista de firmas (CSV)
 
-Una vez esté la configuración definida hay que crear la lista de firmas a generar, que es un archivo CSV (por defecto `{id}_list.csv`).
+Una vez esté la configuración definida hay que crear la lista de firmas a generar, que es un archivo CSV (por defecto `{id en minúsculas}_list.csv`, ej: `enem_list.csv`).
 
 #### Columnas obligatorias
 
@@ -318,8 +376,8 @@ mail-signatures/
 ├── signatures.json      # Configuración de organizaciones
 ├── *_list.csv           # Listas de firmas por organización
 ├── templates/
+│   ├── _base.html.j2    # Plantilla base con estructura común
 │   ├── _macros.html.j2  # Macros reutilizables
-│   ├── _base.html.j2    # Plantilla base (opcional)
 │   ├── original.html.j2 # Plantilla clásica
 │   └── wide-logo.html.j2# Plantilla con logo ancho
 └── {OUTPUT}/            # Firmas generadas por organización
@@ -330,9 +388,11 @@ mail-signatures/
 ### Crear una nueva plantilla
 
 1. Crea un archivo `templates/mi-plantilla.html.j2`
-2. Importa los macros: `{% from "_macros.html.j2" import social_links_bar, ... %}`
-3. Usa los macros para los componentes comunes
+2. Extiende la plantilla base: `{% extends "templates/_base.html.j2" %}`
+3. Sobrescribe los bloques necesarios (`header`, `content`, `links`, `sponsors`, etc.)
 4. Añade el nombre `mi-plantilla` en el campo `template` de la configuración
+
+> **Nota:** También puedes crear una plantilla desde cero importando los macros directamente con `{% from "templates/_macros.html.j2" import ... %}`, pero extender `_base.html.j2` es más sencillo.
 
 ### Macros disponibles
 
