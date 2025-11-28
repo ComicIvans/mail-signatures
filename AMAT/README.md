@@ -2,7 +2,7 @@
 
 Firmas de correo electrónico generadas automáticamente para Asociación de Estudiantes de Matemáticas y Estadística de la Universidad de Granada.
 
-**Última actualización:** 2025-11-28
+**Última actualización:** 2025-11-29
 
 ## Lista de firmas
 

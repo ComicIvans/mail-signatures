@@ -85,17 +85,10 @@
 
 {#- Bloque de imagen/avatar con nombre -#}
 {% macro name_image_block(name_image, organization, size=55, rounded=true, wide=false) -%}
-{%- if name_image is string -%}
-{%- set img_url = name_image -%}
-{%- set img_alt = "👤" -%}
-{%- set img_desc = none -%}
-{%- set img_link = none -%}
-{%- else -%}
 {%- set img_url = name_image.image -%}
 {%- set img_alt = name_image.alt if name_image.alt is defined and name_image.alt else "👤" -%}
 {%- set img_desc = name_image.description if name_image.description is defined and name_image.description else none -%}
 {%- set img_link = name_image.url if name_image.url is defined else none -%}
-{%- endif -%}
 {%- if wide -%}
 {%- set img_style = "min-width: 120px; min-height: 65px; display: block" -%}
 {%- set img_width = 120 -%}

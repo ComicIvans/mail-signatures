@@ -2,7 +2,7 @@
 
 Firmas de correo electrónico generadas automáticamente para Encuentro Nacional de Estudiantes de Matemáticas.
 
-**Última actualización:** 2025-11-28
+**Última actualización:** 2025-11-29
 
 ## Lista de firmas
 

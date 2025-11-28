@@ -51,15 +51,12 @@ S_SPONSOR = Schema(
 )
 
 S_NAME_IMAGE = Schema(
-    Or(
-        And(str, is_url),  # Retrocompatibilidad: solo URL string
-        {  # Nuevo formato: objeto con propiedades
-            "image": And(str, is_url),
-            Optional("url"): And(str, is_url),
-            Optional("alt"): str,
-            Optional("description"): str,
-        },
-    )
+    {  # Objeto con propiedades de la imagen
+        "image": And(str, is_url),
+        Optional("url"): And(str, is_url),
+        Optional("alt"): str,
+        Optional("description"): str,
+    }
 )
 
 S_CONFIG = Schema(

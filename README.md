@@ -185,7 +185,10 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
     "output_path": "EJEMPLO",
     "main_font": "Montserrat",
     "name_font": "Open Sans",
-    "name_image": "https://example.com/logo.png",
+    "name_image": {
+      "image": "https://example.com/logo.png",
+      "description": "Logo de Mi Organización"
+    },
     "color": "#3EB1C8",
     "organization": "Mi Organización",
     "organization_extra": "Entidad Superior (opcional)",
@@ -231,39 +234,35 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
 
 ### Campos de configuración
 
-| Campo                | Obligatorio | Descripción                                                  |
-| -------------------- | ----------- | ------------------------------------------------------------ |
-| `id`                 | ✅           | Identificador de la configuración                            |
-| `template`           | ✅           | Plantilla a usar: `original` o `wide-logo`                   |
-| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)                     |
-| `main_font`          | ✅           | Fuente principal del texto                                   |
-| `name_font`          | ✅           | Fuente del nombre de la persona                              |
-| `name_image`         | ✅           | URL o objeto `{image, url?, alt?, description?}` (ver abajo) |
-| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                            |
-| `organization`       | ✅           | Nombre de la organización                                    |
-| `organization_extra` | ❌           | Organización superior/adicional                              |
-| `phone`              | ❌           | Número de teléfono (sin código de país)                      |
-| `phone_country_code` | ❌           | Código de país (ej: `+34`)                                   |
-| `internal_phone`     | ❌           | Extensión interna                                            |
-| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono)            |
-| `max_width`          | ❌           | Ancho máximo en píxeles                                      |
-| `links`              | ❌           | Lista de enlaces sociales                                    |
-| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                               |
-| `sponsors`           | ❌           | Lista de patrocinadores                                      |
-| `supporter_text`     | ❌           | Texto sobre los colaboradores                                |
-| `supporters`         | ❌           | Lista de colaboradores                                       |
-| `footer_address`     | ❌           | Dirección postal                                             |
-| `footer_text`        | ❌           | Texto legal del footer                                       |
+| Campo                | Obligatorio | Descripción                                            |
+| -------------------- | ----------- | ------------------------------------------------------ |
+| `id`                 | ✅           | Identificador de la configuración                      |
+| `template`           | ✅           | Plantilla a usar: `original` o `wide-logo`             |
+| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)               |
+| `main_font`          | ✅           | Fuente principal del texto                             |
+| `name_font`          | ✅           | Fuente del nombre de la persona                        |
+| `name_image`         | ✅           | Objeto `{image, url?, alt?, description?}` (ver abajo) |
+| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                      |
+| `organization`       | ✅           | Nombre de la organización                              |
+| `organization_extra` | ❌           | Organización superior/adicional                        |
+| `phone`              | ❌           | Número de teléfono (sin código de país)                |
+| `phone_country_code` | ❌           | Código de país (ej: `+34`)                             |
+| `internal_phone`     | ❌           | Extensión interna                                      |
+| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono)      |
+| `max_width`          | ❌           | Ancho máximo en píxeles                                |
+| `links`              | ❌           | Lista de enlaces sociales                              |
+| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                         |
+| `sponsors`           | ❌           | Lista de patrocinadores                                |
+| `supporter_text`     | ❌           | Texto sobre los colaboradores                          |
+| `supporters`         | ❌           | Lista de colaboradores                                 |
+| `footer_address`     | ❌           | Dirección postal                                       |
+| `footer_text`        | ❌           | Texto legal del footer                                 |
 
 #### Formato de `name_image`
 
-Puede ser una URL simple o un objeto:
+Debe ser un objeto con las propiedades de la imagen:
 
 ```json
-// URL simple (retrocompatible)
-"name_image": "https://example.com/logo.png"
-
-// Objeto con más opciones
 "name_image": {
   "image": "https://example.com/logo.png",
   "url": "https://example.com",
@@ -271,6 +270,13 @@ Puede ser una URL simple o un objeto:
   "description": "Ir al sitio web"
 }
 ```
+
+| Campo         | Obligatorio | Descripción                                    |
+| ------------- | ----------- | ---------------------------------------------- |
+| `image`       | ✅           | URL de la imagen                               |
+| `url`         | ❌           | URL del enlace (si hay, la imagen es clicable) |
+| `alt`         | ❌           | Texto alternativo (por defecto: 👤)             |
+| `description` | ❌           | Descripción (se usa en title y aria-label)     |
 
 #### Formato de `links`
 

@@ -2,7 +2,7 @@
 
 Firmas de correo electrónico generadas automáticamente para Delegación de Estudiantes de la Facultad de Ciencias.
 
-**Última actualización:** 2025-11-28
+**Última actualización:** 2025-11-29
 
 ## Lista de firmas
 
