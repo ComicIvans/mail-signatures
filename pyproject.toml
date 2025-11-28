@@ -1,6 +1,6 @@
 [project]
 name = "mail-signatures"
-version = "1.0.0"
+version = "2.0.0"
 description = "Script para generar firmas de correo electrónico"
 authors = [{name = "Iván Salido Cobo"}]
 license = "MIT"
@@ -10,3 +10,6 @@ dependencies = [
     "jinja2>=3.1.5",
     "schema>=0.7.7",
 ]
+
+[project.scripts]
+mail-signatures = "main:main"

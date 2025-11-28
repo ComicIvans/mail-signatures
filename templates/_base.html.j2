@@ -1,0 +1,70 @@
+{#
+  Plantilla base para firmas de correo.
+  
+  Esta plantilla define la estructura HTML común y los bloques
+  que pueden ser sobrescritos por plantillas hijas.
+-#}
+{%- from "templates/_macros.html.j2" import social_links_bar, sponsors_section, footer, contact_info, name_image_block -%}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Iván Salido Cobo" />
+    <meta name="github" content="https://github.com/ComicIvans/mail-signatures" />
+    <meta name="last-modified" content="{{ date }}" />
+    <meta name="icons-source" content="https://tabler-icons.io/" />
+    <title></title>
+  </head>
+  <body style="margin: 8px; padding: 0">
+    <div>
+      <!--[if mso]>
+        <style type="text/css">
+          table {
+            border-collapse: collapse;
+          }
+          td {
+            padding: 0;
+          }
+        </style>
+      <![endif]-->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family: '{{ main_font }}', sans-serif; font-size: 10pt{% if max_width is defined %}; max-width: {{ max_width }}px{% endif %}{%- block body_style %}{% endblock %}">
+        <tr>
+          <td>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width: fit-content{% if max_width is defined %}; max-width: {{ max_width }}px{% endif %}">
+              <tr>
+                <td>
+{%- block header %}{% endblock %}
+{%- block content %}{% endblock %}
+{%- block links -%}
+{%- set links_content = social_links_bar(links, max_width=max_width) -%}
+{%- if links_content %}
+{{ links_content | indent(18, first=true) }}
+{%- endif -%}
+{%- endblock -%}
+{%- block sponsors -%}
+{%- set sponsors_content = sponsors_section(sponsor_text, sponsors, color, max_width) -%}
+{%- if sponsors_content %}
+{{ sponsors_content | indent(18, first=true) }}
+{%- endif -%}
+{%- endblock -%}
+{%- block supporters -%}
+{%- set supporters_content = sponsors_section(supporter_text, supporters, color, max_width) -%}
+{%- if supporters_content %}
+{{ supporters_content | indent(18, first=true) }}
+{%- endif -%}
+{%- endblock %}
+                </td>
+              </tr>
+            </table>
+{%- block footer_section -%}
+{%- set footer_content = footer(footer_address, footer_text, color, max_width) -%}
+{%- if footer_content %}
+{{ footer_content | indent(12, first=true) }}
+{%- endif -%}
+{%- endblock %}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

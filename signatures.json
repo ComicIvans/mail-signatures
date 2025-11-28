@@ -5,7 +5,10 @@
     "output_path": "DEFC",
     "main_font": "Montserrat",
     "name_font": "Open Sans",
-    "name_image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d4a3e97b3d5319a0f1dc568b55361c4e99eeff93/DEFC/img/DEFC.png",
+    "name_image": {
+      "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d4a3e97b3d5319a0f1dc568b55361c4e99eeff93/DEFC/img/DEFC.png",
+      "description": "Logo de Delegación de Estudiantes de la Facultad de Ciencias"
+    },
     "color": "#3EB1C8",
     "organization": "Delegación de Estudiantes de la Facultad de Ciencias",
     "organization_extra": "Universidad de Granada",
@@ -16,37 +19,44 @@
       {
         "url": "https://defc.ugr.es/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/396fd52b1336beaebf1b6b8357a794abb563843e/DEFC/img/Web.png",
-        "alt": "🌐"
+        "alt": "🌐",
+        "description": "Sitio web de la DEFC"
       },
       {
         "url": "https://instagram.com/defcUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/396fd52b1336beaebf1b6b8357a794abb563843e/DEFC/img/Instagram.png",
-        "alt": "📷"
+        "alt": "📷",
+        "description": "Instagram de la DEFC"
       },
       {
         "url": "https://x.com/defcUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/48d0379c5a9f91cb37ddfe2c65722609674896ac/DEFC/img/X.png",
-        "alt": "X"
+        "alt": "X",
+        "description": "X (Twitter) de la DEFC"
       },
       {
         "url": "https://t.me/defcUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/396fd52b1336beaebf1b6b8357a794abb563843e/DEFC/img/Telegram.png",
-        "alt": "💬"
+        "alt": "💬",
+        "description": "Canal de Telegram de la DEFC"
       },
       {
         "url": "https://discord.com/invite/rRPSvVGWjz",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/4796d7e3111e462a7783d7746f297c8634e44bec/DEFC/img/Discord.png",
-        "alt": "🎧"
+        "alt": "🎧",
+        "description": "Servidor de Discord de la DEFC"
       },
       {
         "url": "https://github.com/defcUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/d0f6dafde7eb2bbcb21d6b8ffd350a72c51513a4/DEFC/img/GitHub.png",
-        "alt": "⌨️"
+        "alt": "⌨️",
+        "description": "GitHub de la DEFC"
       },
       {
         "url": "https://www.linkedin.com/company/defcugr",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/1b68c92a2c8a8497ab717338e85d7d9a906216c9/DEFC/img/Linkedin.png",
-        "alt": "🎓"
+        "alt": "🎓",
+        "description": "LinkedIn de la DEFC"
       }
     ]
   },
@@ -66,32 +76,38 @@
       {
         "url": "https://dge.ugr.es/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/511affdfe15360dd96e6765b4fd7dba6276ac599/DGE/img/Web.png",
-        "alt": "🌐"
+        "alt": "🌐",
+        "description": "Sitio web de la DGE"
       },
       {
         "url": "https://instagram.com/dgeUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/511affdfe15360dd96e6765b4fd7dba6276ac599/DGE/img/Instagram.png",
-        "alt": "📷"
+        "alt": "📷",
+        "description": "Instagram de la DGE"
       },
       {
         "url": "https://x.com/dgeUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/48d0379c5a9f91cb37ddfe2c65722609674896ac/DGE/img/X.png",
-        "alt": "X"
+        "alt": "X",
+        "description": "X (Twitter) de la DGE"
       },
       {
         "url": "https://t.me/dge_UGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/511affdfe15360dd96e6765b4fd7dba6276ac599/DGE/img/Telegram.png",
-        "alt": "💬"
+        "alt": "💬",
+        "description": "Canal de Telegram de la DGE"
       },
       {
         "url": "https://github.com/dgeUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/500c2eddbd4d90650dbbf575e584e780844fb4cb/DGE/img/GitHub.png",
-        "alt": "⌨️"
+        "alt": "⌨️",
+        "description": "GitHub de la DGE"
       },
       {
         "url": "https://www.linkedin.com/company/delegación-general-de-estudiantes-ugr",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/1b68c92a2c8a8497ab717338e85d7d9a906216c9/DGE/img/Linkedin.png",
-        "alt": "🎓"
+        "alt": "🎓",
+        "description": "LinkedIn de la DGE"
       }
     ],
     "footer_text": "Este mensaje ha sido generado desde una cuenta de la <a href='http://www.ugr.es/'>Universidad de Granada</a> para los fines propios de la institución. Su contenido se considera información confidencial, por lo que queda informado de que su utilización, divulgación o copia sin autorización no está permitida. Si usted ha recibido indebidamente el correo le rogamos que advierta de ello por esta misma vía al remitente y proceda a su eliminación. Cualquier incidencia relacionada con la recepción de nuestros correos electrónicos y en particular las relativas a la seguridad y confidencialidad pueden ser comunicadas a <a href='mailto:protecciondedatos@ugr.es'>protecciondedatos@ugr.es</a>. Para más información al respecto, puede consultar nuestra <a href='https://www.ugr.es/condiciones-legales'>política de privacidad</a>.<br><br>This message has been generated from an e-mail address of the University of Granada for the institution's own purposes. Its content is considered confidential information, so it is informed that its unauthorized use, disclosure or copying is not permitted. If you have improperly received the email please warn the sender of this, same way and proceed to its removal. Any incident related to the receipt of our emails and in particular those related to security and confidentiality may be communicated to <a href='protecciondedatos@ugr.es'>protecciondedatos@ugr.es</a>. For more information, please refer to our <a href='https://www.ugr.es/en/terms-of-use-privacy'>privacy policy</a>."
@@ -111,32 +127,38 @@
       {
         "url": "https://amatugr.es/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/de0e12d8397a6f3b9fb5c56b36e5a2f587d0af10/AMAT/img/Web.png",
-        "alt": "🌐"
+        "alt": "🌐",
+        "description": "Sitio web de AMAT"
       },
       {
         "url": "https://instagram.com/amat.UGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/de0e12d8397a6f3b9fb5c56b36e5a2f587d0af10/AMAT/img/Instagram.png",
-        "alt": "📷"
+        "alt": "📷",
+        "description": "Instagram de AMAT"
       },
       {
         "url": "https://x.com/amatUGR",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/48d0379c5a9f91cb37ddfe2c65722609674896ac/AMAT/img/X.png",
-        "alt": "X"
+        "alt": "X",
+        "description": "X (Twitter) de AMAT"
       },
       {
         "url": "https://www.youtube.com/@amatugr",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/de0e12d8397a6f3b9fb5c56b36e5a2f587d0af10/AMAT/img/Youtube.png",
-        "alt": "🎞️"
+        "alt": "🎞️",
+        "description": "Canal de YouTube de AMAT"
       },
       {
         "url": "https://t.me/AMATugr",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/de0e12d8397a6f3b9fb5c56b36e5a2f587d0af10/AMAT/img/Telegram.png",
-        "alt": "💬"
+        "alt": "💬",
+        "description": "Canal de Telegram de AMAT"
       },
       {
         "url": "https://www.linkedin.com/company/amatugr",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/5cd89f0c1226bb91b649fb7a944e0e57d3b30b79/AMAT/img/Linkedin.png",
-        "alt": "🎓"
+        "alt": "🎓",
+        "description": "LinkedIn de AMAT"
       }
     ]
   },
@@ -153,27 +175,32 @@
       {
         "url": "https://enem.anem.es/2025/",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/be297f82940785e12bbd1d9a0fe6ad57ed61d52b/ENEM/img/Web.png",
-        "alt": "🌐"
+        "alt": "🌐",
+        "description": "Sitio web del XXVI ENEM"
       },
       {
         "url": "https://instagram.com/enem.mat",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/be297f82940785e12bbd1d9a0fe6ad57ed61d52b/ENEM/img/Instagram.png",
-        "alt": "📷"
+        "alt": "📷",
+        "description": "Instagram del ENEM"
       },
       {
         "url": "https://linkedin.com/company/enem-mat",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/aa503bb88b9282dad2e95f5b0579b62d4a5b89ef/ENEM/img/Linkedin.png",
-        "alt": "🎓"
+        "alt": "🎓",
+        "description": "LinkedIn del ENEM"
       },
       {
         "url": "https://x.com/ENEM_mat",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/be297f82940785e12bbd1d9a0fe6ad57ed61d52b/ENEM/img/X.png",
-        "alt": "X"
+        "alt": "X",
+        "description": "X (Twitter) del ENEM"
       },
       {
         "url": "https://t.me/ENEMGRX",
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/be297f82940785e12bbd1d9a0fe6ad57ed61d52b/ENEM/img/Telegram.png",
-        "alt": "💬"
+        "alt": "💬",
+        "description": "Canal de Telegram del XXVI ENEM"
       }
     ],
     "sponsor_text": "Con la colaboración de:",
@@ -233,27 +260,32 @@
       {
         "url": "https://www.creup.es",
         "image": "https://www.creup.es/documentos/imagen/firmas/Web.png",
-        "alt": "🌐"
+        "alt": "🌐",
+        "description": "Sitio web de CREUP"
       },
       {
         "url": "https://www.instagram.com/creupcreup",
         "image": "https://www.creup.es/documentos/imagen/firmas/Instagram.png",
-        "alt": "📷"
+        "alt": "📷",
+        "description": "Instagram de CREUP"
       },
       {
         "url": "https://x.com/creupcreup",
         "image": "https://www.creup.es/documentos/imagen/firmas/X.png",
-        "alt": "X"
+        "alt": "X",
+        "description": "X (Twitter) de CREUP"
       },
       {
         "url": "https://t.me/CREUP",
         "image": "https://www.creup.es/documentos/imagen/firmas/Telegram.png",
-        "alt": "💬"
+        "alt": "💬",
+        "description": "Canal de Telegram de CREUP"
       },
       {
         "url": "https://www.linkedin.com/company/creup",
         "image": "https://www.creup.es/documentos/imagen/firmas/Linkedin.png",
-        "alt": "🎓"
+        "alt": "🎓",
+        "description": "LinkedIn de CREUP"
       }
     ],
     "footer_address": "Oficina de CREUP - Edificio de Estudiantes, Delegación Central de Estudiantes de la Universidad Complutense de Madrid, avenida Complutense, s/N, Moncloa - Aravaca, 28040, Madrid",

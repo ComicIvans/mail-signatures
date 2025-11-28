@@ -14,6 +14,18 @@ Las firmas partieron de una base que supongo que será de @jesusjmma y, actualme
 
 ---
 
+## Características
+
+- ✅ Generación de firmas HTML a partir de plantillas Jinja2
+- ✅ Soporte para múltiples configuraciones de organizaciones
+- ✅ Validación de datos CSV y configuración JSON
+- ✅ CLI con argumentos para automatización
+- ✅ Previsualización de firmas generadas
+- ✅ Compatibilidad mejorada con clientes de correo (uso de tablas HTML)
+- ✅ Macros reutilizables para componentes comunes
+
+---
+
 ## Ejemplos de firmas
 
 A continuación hay unas capturas de cómo se deberían de ver las firmas.
@@ -124,118 +136,212 @@ Simplemente porque pegando todo el contenido del archivo se pone un espacio en b
 
 Para generar firmas, primero hay que clonar o descargar este repositorio y tener instalado [uv](https://github.com/astral-sh/uv).
 
+### Uso básico
+
+```bash
+# Modo interactivo (por defecto)
+uv run main.py
+
+# Especificar archivo de configuración
+uv run main.py -c signatures.json
+
+# Seleccionar perfil por ID (sin interacción)
+uv run main.py -p ENEM
+
+# Especificar archivo CSV de firmas
+uv run main.py -l mis_firmas.csv
+
+# Generar índice de previsualización
+uv run main.py --preview
+
+# Modo verbose (más información)
+uv run main.py -v
+
+# Modo silencioso (solo errores)
+uv run main.py -q
+
+# Combinar opciones
+uv run main.py -c config.json -p CREUP -l firmas.csv --preview
+```
+
+### Opciones de línea de comandos
+
+| Opción            | Descripción                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| `-c`, `--config`  | Archivo JSON de configuración (por defecto: `signatures.json`)     |
+| `-p`, `--profile` | Seleccionar automáticamente el perfil con el ID especificado       |
+| `-l`, `--list`    | Archivo CSV con la lista de firmas                                 |
+| `--preview`       | Generar un `index.html` con todas las firmas para previsualización |
+| `-v`, `--verbose` | Mostrar información detallada                                      |
+| `-q`, `--quiet`   | Modo silencioso (solo errores)                                     |
+
+### Configuración (`signatures.json`)
+
 Lo primero que debes hacer es asegurarte de que tienes definida la configuración del tipo de firma en el archivo `signatures.json`. El archivo debe de seguir la siguiente estructura:
 
 ```json
 [
   {
-    "id": "",
-    "template": "",
-    "output_path": "",
-    "main_font": "",
-    "name_font": "",
-    "name_image": "",
-    "color": "",
-    "organization": "",
-    "organization_extra": "",
-    "phone": "",
-    "phone_country_code": "",
-    "internal_phone": "",
-    "opt_mail": "",
-    "max_width": 0,
+    "id": "EJEMPLO",
+    "template": "original",
+    "output_path": "EJEMPLO",
+    "main_font": "Montserrat",
+    "name_font": "Open Sans",
+    "name_image": "https://example.com/logo.png",
+    "color": "#3EB1C8",
+    "organization": "Mi Organización",
+    "organization_extra": "Entidad Superior (opcional)",
+    "phone": "123 456 789",
+    "phone_country_code": "+34",
+    "internal_phone": "12345",
+    "opt_mail": "info@ejemplo.es",
+    "max_width": 315,
     "links": [
       {
-        "url": "",
-        "image": "",
-        "alt": ""
+        "url": "https://ejemplo.es",
+        "image": "https://example.com/web-icon.png",
+        "alt": "🌐"
       }
     ],
-    "sponsor_text": "",
-    "sponsors": {
-      "url": "",
-      "image": "",
-      "alt": "",
-      "width": 0,
-      "height": 0
-    },
-    "supporter_text": "",
-    "supporters": {
-      "url": "",
-      "image": "",
-      "alt": "",
-      "width": 0,
-      "height": 0
-    },
-    "footer_address": "",
-    "footer_text": ""
+    "sponsor_text": "Con la colaboración de:",
+    "sponsors": [
+      {
+        "url": "https://sponsor.com",
+        "image": "https://sponsor.com/logo.png",
+        "alt": "Sponsor",
+        "width": 100,
+        "height": 50
+      }
+    ],
+    "supporter_text": "Con el apoyo de:",
+    "supporters": [
+      {
+        "url": "https://supporter.com",
+        "image": "https://supporter.com/logo.png",
+        "alt": "Supporter",
+        "height": 55
+      }
+    ],
+    "footer_address": "Calle Ejemplo, 123, 12345 Ciudad",
+    "footer_text": "Texto legal opcional..."
   }
 ]
 ```
 
-Donde todas son obligatorias salvo las que se especifican como opcionales y significan:
+### Campos de configuración
 
-- `id` es el nombre de la firma que se mostrará a la hora de seleccionarla.
-- `template` es el nombre de la plantilla a usar dentro de la carpeta `templates`.
-- `output_path` es el nombre de la carpeta en la que se generarán este tipo de firmas.
-- `main_font` es la fuente de texto principal de la firma.
-- `name_font` es la fuente de texto del nombre de la persona.
-- `name_image` es el enlace a la imagen al lado del nombre.
-- `color` es el código hexadecimal del color que usa la firma.
-- `organization` es el nombre de la entidad.
-- `organization_extra` _(OPCIONAL)_ es por si la entidad pertenece a otra.
-- `phone` _(OPCIONAL)_ es el número de teléfono _(sin el código internacional)_ y se puede escribir con espacios.
-- `phone_country_code` _(OPCIONAL)_ es el código internacional del teléfono con el +.
-- `internal_phone` _(OPCIONAL)_ es por si hay un número de teléfono interno.
-- `opt_mail` _(OPCIONAL)_ es por si no hay número de teléfono y se quiere mostrar un segundo correo genérico.
-- `max_width` _(OPCIONAL)_ es por si se quiere limitar la longitud horizontal máxima de la firma para que si el nombre de la organización es demasiado largo se parta en varias líneas.
-- `links` _(OPCIONAL)_ es la lista de enlaces incluídos en la firma donde cada enlace tiene que ser un objeto con la URL `url`, el enlace a su imagen, `image` y el texto (o emoji) a mostrar si la imagen no carga, `alt`.
-- `sponsor_text` _(OPCIONAL)_ es el texto que aparecerá justo encima de las imágenes de los patrocinadores.
-- `sponsors` _(OPCIONAL)_ es una lista de patrocinadores con la imagen, el enlace y un texto alternativo. Además, se puede indicar el ancho y alto.
-- `supporter_text` _(OPCIONAL)_ es el texto que aparecerá justo encima de las imágenes de los colaboradores (los que no sean patrocinadores en el caso de que los haya).
-- `supporters` _(OPCIONAL)_ es una lista de colaboradores con la imagen, el enlace y un texto alternativo. Además, se puede indicar el ancho y alto.
-- `footer_address` _(OPCIONAL)_ es una dirección postal para incluir al final de la firma.
-- `footer_text` _(OPCIONAL)_ es un texto para incluir al final de la firma, tras la dirección postal, si la hay.
+| Campo                | Obligatorio | Descripción                                       |
+| -------------------- | ----------- | ------------------------------------------------- |
+| `id`                 | ✅           | Identificador de la configuración                 |
+| `template`           | ✅           | Plantilla a usar: `original` o `wide-logo`        |
+| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)          |
+| `main_font`          | ✅           | Fuente principal del texto                        |
+| `name_font`          | ✅           | Fuente del nombre de la persona                   |
+| `name_image`         | ✅           | URL de la imagen/logo (debe ser una URL válida)   |
+| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                 |
+| `organization`       | ✅           | Nombre de la organización                         |
+| `organization_extra` | ❌           | Organización superior/adicional                   |
+| `phone`              | ❌           | Número de teléfono (sin código de país)           |
+| `phone_country_code` | ❌           | Código de país (ej: `+34`)                        |
+| `internal_phone`     | ❌           | Extensión interna                                 |
+| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono) |
+| `max_width`          | ❌           | Ancho máximo en píxeles                           |
+| `links`              | ❌           | Lista de enlaces sociales                         |
+| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                    |
+| `sponsors`           | ❌           | Lista de patrocinadores                           |
+| `supporter_text`     | ❌           | Texto sobre los colaboradores                     |
+| `supporters`         | ❌           | Lista de colaboradores                            |
+| `footer_address`     | ❌           | Dirección postal                                  |
+| `footer_text`        | ❌           | Texto legal del footer                            |
 
-Una vez esté la configuración definida hay que crear la lista de firmas a generar, que es un archivo CSV con el nombre que se quiera (`signatures_list.csv` por defecto) que debe seguir la siguiente estructura:
+### Plantillas disponibles
 
-- La primera fila son columnas, que pueden estar tanto en mayúscula como en minúscula, dentro de las que deben estar las siguientes:
+| Plantilla   | Descripción                                                |
+| ----------- | ---------------------------------------------------------- |
+| `original`  | Diseño clásico con imagen circular y barra horizontal      |
+| `wide-logo` | Logo ancho arriba con barra vertical al lado del contenido |
 
-```json
-["name", "position", "mail"]
+### Lista de firmas (CSV)
+
+Una vez esté la configuración definida hay que crear la lista de firmas a generar, que es un archivo CSV (por defecto `{id}_list.csv`).
+
+#### Columnas obligatorias
+
+```csv
+name,position,mail
 ```
 
-- También se pueden incluir las siguientes columnas que, en caso de tener algo, sustituirán a lo que haya especificado en la configuración general de la firma. Se puede escribir `None` en la fila si se quiere eliminar para esa firma concreta un valor de configuración por defecto de los que eran opcionales.
+#### Columnas opcionales
 
-```json
-["output", "phone", "phone_country_code", "internal_phone", "opt_mail", "organization_extra", "main_font", "name_font", "max_width", "name_image"]
+Estas columnas, si tienen valor, sobrescriben la configuración general:
+
+```csv
+output,phone,phone_country_code,internal_phone,opt_mail,organization_extra,main_font,name_font,max_width,name_image,color,organization
 ```
 
-Es recomendable añadir la columna `output` para especificar el nombre del archivo en el que guardar la firma.
+> **Nota:** Usa `None` en una celda para eliminar un valor opcional de la configuración general para esa firma específica.
 
-El resto de filas del CSV son los datos correspondientes a cada columna, siendo cada fila una firma a generar con dichos datos.
+#### Ejemplo de CSV
 
-Finalmente se pueden generar las firmas con `uv run main.py`.
+```csv
+Name,Position,Mail,Output,Phone,internal_phone
+Ana García,Presidenta,presidencia@ejemplo.es,Firma Presidenta,123 456 789,12345
+Juan López,Secretario,secretaria@ejemplo.es,Firma Secretario,,None
+```
 
 ## Clientes de correo soportados
 
-Las pruebas no han sido muy exhaustivas, pero la firma en algunos sitios va bien :green*circle:, regulinchi *(se ve bien en general pero puede fallar en algún detalle)\_ :yellow_circle: y mal :red_circle:. Esta es la lista:
+Las firmas ahora usan tablas HTML en lugar de flexbox para mejorar la compatibilidad con clientes de correo. Las pruebas no han sido muy exhaustivas, pero la firma en algunos sitios va bien :green_circle:, regulinchi _(se ve bien en general pero puede fallar en algún detalle)_ :yellow_circle: y mal :red_circle:. Esta es la lista:
 
 :green_circle: Webmail
 
 :green_circle: Thunderbird
 
-:green_circle: Thunderbird móvil
+:green_circle: Outlook web
 
-:yellow_circle: Outlook web
+:green_circle: Outlook móvil
 
-:yellow_circle: Outlook móvil
+:green_circle: Gmail web
 
-:yellow_circle: Gmail web
+:green_circle: Gmail móvil
 
-:yellow_circle: Gmail móvil
+:yellow_circle: Thunderbird móvil
 
 :red_circle: Canary Mail
 
-## Tareas pendientes
+## Estructura del proyecto
 
-- Al comprobar el CSV solo comprueba los nombres de las columnas, permitiendo que haya filas en las que una columna obligatoria esté vacía.
+```
+mail-signatures/
+├── main.py              # Script principal
+├── schemas.py           # Validación de datos
+├── signatures.json      # Configuración de organizaciones
+├── *_list.csv           # Listas de firmas por organización
+├── templates/
+│   ├── _macros.html.j2  # Macros reutilizables
+│   ├── _base.html.j2    # Plantilla base (opcional)
+│   ├── original.html.j2 # Plantilla clásica
+│   └── wide-logo.html.j2# Plantilla con logo ancho
+└── {OUTPUT}/            # Firmas generadas por organización
+```
+
+## Desarrollo
+
+### Crear una nueva plantilla
+
+1. Crea un archivo `templates/mi-plantilla.html.j2`
+2. Importa los macros: `{% from "_macros.html.j2" import social_links_bar, ... %}`
+3. Usa los macros para los componentes comunes
+4. Añade el nombre `mi-plantilla` en el campo `template` de la configuración
+
+### Macros disponibles
+
+| Macro                                                                     | Descripción                           |
+| ------------------------------------------------------------------------- | ------------------------------------- |
+| `social_link(link, size)`                                                 | Renderiza un enlace social individual |
+| `social_links_bar(links, size, max_width)`                                | Barra de enlaces sociales             |
+| `sponsor_image(item, max_width)`                                          | Imagen de sponsor/supporter           |
+| `sponsors_section(text, items, color, max_width, with_bar)`               | Sección completa de sponsors          |
+| `footer(footer_address, footer_text, color, max_width)`                   | Footer con dirección y texto legal    |
+| `contact_info(phone, phone_country_code, internal_phone, mail, opt_mail)` | Información de contacto               |
+| `name_image_block(name_image, organization, size, rounded, wide)`         | Bloque de imagen/avatar con nombre    |

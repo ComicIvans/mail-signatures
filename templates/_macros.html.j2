@@ -1,0 +1,111 @@
+{#- Macros reutilizables para las firmas de correo. -#}
+{#- Todos los macros generan contenido compacto desde columna 0. Usar | indent(n) donde se invoquen. -#}
+
+{#- Macro interno: genera un enlace social con imagen (todo en una línea) -#}
+{% macro social_link(link, size=35) -%}
+{%- set has_alt = link.alt is defined and link.alt -%}
+{%- set has_desc = link.description is defined and link.description -%}
+<a href="{{ link.url }}"{% if has_desc %} title="{{ link.description }}" aria-label="{{ link.description }}"{% endif %} style="border-radius: 50%; color: inherit; text-decoration: none; margin-right: 5px; min-width: {{ size }}px; min-height: {{ size }}px; display: inline-block; text-align: center; vertical-align: middle; background-color: white; font-weight: bold; font-size: 14pt"><img{% if has_alt %} alt="{{ link.alt }}"{% endif %} aria-hidden="true" moz-do-not-send="true" style="font-size: 16pt; max-width: {{ size }}px; max-height: {{ size }}px; display: block" height="{{ size }}" width="{{ size }}" src="{{ link.image }}" /></a>
+{%- endmacro %}
+
+{#- Barra de enlaces sociales -#}
+{% macro social_links_bar(links, size=35, max_width=none) -%}
+{%- if links is defined and links -%}
+<div style="margin-bottom: 20px{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}">
+{%- for link in links %}
+  {{ social_link(link, size) }}
+{%- endfor %}
+</div>
+{%- endif %}
+{%- endmacro %}
+
+{#- Macro interno: genera una imagen de patrocinador (todo en una línea) -#}
+{% macro sponsor_image(item, max_width=none) -%}
+{%- set has_alt = item.alt is defined and item.alt -%}
+{%- set has_desc = item.description is defined and item.description -%}
+{%- if item.url is defined -%}
+<a href="{{ item.url }}"{% if has_desc %} title="{{ item.description }}" aria-label="{{ item.description }}"{% endif %} style="color: inherit; text-decoration: none; display: inline-block; margin-right: 5px; margin-bottom: 5px"><img{% if has_alt %} alt="{{ item.alt }}"{% endif %} aria-hidden="true" moz-do-not-send="true" style="max-width: {% if max_width %}{{ max_width }}px{% else %}none{% endif %}; width: {% if item.width is defined %}{{ item.width | int }}px{% else %}auto{% endif %}; height: {% if item.height is defined %}{{ item.height | int }}px{% else %}auto{% endif %}; display: block"{% if item.width is defined %} width="{{ item.width | int }}"{% endif %}{% if item.height is defined %} height="{{ item.height | int }}"{% endif %} src="{{ item.image }}" /></a>
+{%- else -%}
+<span style="display: inline-block; margin-right: 5px; margin-bottom: 5px"><img{% if has_alt %} alt="{{ item.alt }}"{% endif %} aria-hidden="true" moz-do-not-send="true" style="max-width: {% if max_width %}{{ max_width }}px{% else %}none{% endif %}; width: {% if item.width is defined %}{{ item.width | int }}px{% else %}auto{% endif %}; height: {% if item.height is defined %}{{ item.height | int }}px{% else %}auto{% endif %}; display: block"{% if item.width is defined %} width="{{ item.width | int }}"{% endif %}{% if item.height is defined %} height="{{ item.height | int }}"{% endif %} src="{{ item.image }}" /></span>
+{%- endif %}
+{%- endmacro %}
+
+{#- Sección de patrocinadores/colaboradores -#}
+{% macro sponsors_section(text, items, color, max_width=none, with_bar=false) -%}
+{%- if items is defined and items -%}
+{%- if text is defined -%}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px">
+  <tr>
+{%- if with_bar %}
+    <td style="width: 4px; background-color: {{ color | lower }}; border-radius: 10px"></td>
+    <td style="width: 10px"></td>
+{%- endif %}
+    <td><p style="margin: 0; font-size: 12pt">{{ text }}</p></td>
+  </tr>
+</table>
+{% endif -%}
+<div style="margin-bottom: 20px{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}">
+{%- for item in items %}
+  {{ sponsor_image(item, max_width) }}
+{%- endfor %}
+</div>
+{%- endif %}
+{%- endmacro %}
+
+{#- Pie de página -#}
+{% macro footer(footer_address, footer_text, color, max_width=none) -%}
+{%- if footer_address is defined or footer_text is defined -%}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-size: 8pt{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}">
+{%- if footer_address is defined %}
+  <tr>
+    <td><strong style="color: {{ color | lower }}">{{ footer_address }}</strong></td>
+  </tr>
+{%- endif %}
+{%- if footer_text is defined %}
+  <tr>
+    <td>
+      <p style="color: dimgray; margin: 5px 0 0 0">{{ footer_text }}</p>
+    </td>
+  </tr>
+{%- endif %}
+</table>
+{%- endif %}
+{%- endmacro %}
+
+{#- Información de contacto (todo en una línea) -#}
+{% macro contact_info(phone, phone_country_code, internal_phone, mail, opt_mail) -%}
+{%- if phone is defined -%}
+<p style="margin: 0"><a style="color: inherit; text-decoration: none" href="tel:{{ phone_country_code }}{{ phone | replace(' ', '') }}">{{ phone }}</a>{% if internal_phone is defined %}&nbsp;({{ internal_phone }}){% endif %}<strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong><a style="color: inherit; text-decoration: none" href="mailto:{{ mail }}">{{ mail }}</a></p>
+{%- elif opt_mail is defined -%}
+<p style="margin: 0"><a style="color: inherit; text-decoration: none" href="mailto:{{ mail }}">{{ mail }}</a><strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong><a style="color: inherit; text-decoration: none" href="mailto:{{ opt_mail }}">{{ opt_mail }}</a></p>
+{%- else -%}
+<p style="margin: 0"><a style="color: inherit; text-decoration: none" href="mailto:{{ mail }}">{{ mail }}</a></p>
+{%- endif %}
+{%- endmacro %}
+
+{#- Bloque de imagen/avatar con nombre -#}
+{% macro name_image_block(name_image, organization, size=55, rounded=true, wide=false) -%}
+{%- if name_image is string -%}
+{%- set img_url = name_image -%}
+{%- set img_alt = "👤" -%}
+{%- set img_desc = none -%}
+{%- set img_link = none -%}
+{%- else -%}
+{%- set img_url = name_image.image -%}
+{%- set img_alt = name_image.alt if name_image.alt is defined and name_image.alt else "👤" -%}
+{%- set img_desc = name_image.description if name_image.description is defined and name_image.description else none -%}
+{%- set img_link = name_image.url if name_image.url is defined else none -%}
+{%- endif -%}
+{%- if wide -%}
+{%- set img_style = "min-width: 120px; min-height: 65px; display: block" -%}
+{%- set img_width = 120 -%}
+{%- else -%}
+{%- set img_style = "width: " ~ size ~ "px; height: " ~ size ~ "px; display: block" ~ ("; border-radius: 50%" if rounded else "") -%}
+{%- set img_width = size -%}
+{%- endif -%}
+{%- if img_link -%}
+<a href="{{ img_link }}"{% if img_desc %} title="{{ img_desc }}" aria-label="{{ img_desc }}"{% endif %} style="color: inherit; text-decoration: none; display: block"><img alt="{{ img_alt }}" role="img" moz-do-not-send="true" style="{{ img_style }}" height="{{ size if not wide else 65 }}" width="{{ img_width }}" src="{{ img_url }}" /></a>
+{%- else -%}
+<img alt="{{ img_alt }}"{% if img_desc %} aria-label="{{ img_desc }}"{% endif %} role="img" moz-do-not-send="true" style="{{ img_style }}" height="{{ size if not wide else 65 }}" width="{{ img_width }}" src="{{ img_url }}" />
+{%- endif %}
+{%- endmacro %}

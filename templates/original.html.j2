@@ -1,103 +1,34 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="author" content="Iván Salido Cobo" />
-    <meta name="github" content="https://github.com/ComicIvans/mail-signatures" />
-    <meta name="last-modified" content="{{ date }}" />
-    <meta name="icons-source" content="https://tabler-icons.io/" />
-    <title></title>
-  </head>
-  <body>
-    <div style="font-family: '{{ main_font }}', sans-serif; font-size: 10pt; margin-top: 10px">
-      <div style="width: {% if max_width is defined %}{{ max_width }}px{% else %}fit-content{% endif %}">
-        <div style="display: flex; flex-direction: row; align-items: center; font-size: 16pt; margin-bottom: 10px">
-          <img alt="👤" moz-do-not-send="true" style="min-width: 55px; min-height: 55px; max-width: 55px; max-height: 55px; display: flex; align-items: center; justify-content: center; color: white; overflow: hidden; border-radius: 50%; margin-right: 10px" height="55" width="55" src="{{ name_image }}" />
-          <p style="margin: auto; margin-left: 0; font-family: '{{ name_font }}', sans-serif">
-            <b>{{ name }}</b>
-          </p>
-        </div>
-        <div style="margin-bottom: 10px; height: 4px; background-color: {{ color }}; border-radius: 10px"></div>
-        <div style="margin-bottom: 20px">
-          <p style="margin: 0">
-            <b>{{ position }}</b>
-          </p>
-          <p style="margin: 0">{{ organization }}</p>
-          {%- if phone is defined %}
-          <br />
-          <p style="margin: 0">
-            {% if phone_country_code is defined %}
-              <a style="color: inherit; text-decoration: none" href="tel:{{ phone_country_code }}{{ phone|replace(' ', '') }}">{{ phone }}</a>
-            {% else %}
-              {{ phone }}
-            {% endif %}
-            {% if internal_phone is defined %}
-              &nbsp;({{ internal_phone }})
-            {% endif %}
-            <b>&nbsp;&nbsp;·&nbsp;&nbsp;</b><a style="color: inherit; text-decoration: none" href="mailto:{{ mail }}">{{ mail }}</a>
-          </p>
-          {%- elif opt_mail is defined %}
-          <br />
-          <a style="color: inherit; text-decoration: none" href="mailto:{{ mail }}">{{ mail }}</a><b>&nbsp;&nbsp;·&nbsp;&nbsp;</b><a style="color: inherit; text-decoration: none" href="mailto:{{ opt_mail }}">{{ opt_mail }}</a>
-          {%- else %}
-          <br />
-          <a style="color: inherit; text-decoration: none" href="mailto:{{ mail }}">{{ mail }}</a>
-          {%- endif %}
-          {%- if organization_extra is defined %}
-          <br />
-          <p style="margin: 0">
-            <i>{{ organization_extra }}</i>
-          </p>
-          {%- endif %}
-        </div>
-        {%- if links is defined %}
-        <div style="display: flex; align-items: center; margin-bottom: 20px">
-          {%- for link in links %}
-          <a href="{{ link.url }}" style="border-radius: 50%; color: inherit; text-decoration: none; margin-right: 5px; min-width: 35px; min-height: 35px; display: flex; align-items: center; justify-content: center; background-color: white; font-weight: bold; font-size: 14pt">
-            <img alt="{{ link.alt }}" moz-do-not-send="true" style="font-size: 16pt; max-width: 35px; max-height: 35px; display: flex; align-items: center; justify-content: center" height="35" width="35" src="{{ link.image }}" />
-          </a>
-          {%- endfor %}
-        </div>
-        {%- endif %}
-      </div>
-      {%- if sponsor_text is defined %}
-      <div style="margin-bottom: 10px">
-        <p style="margin: 0; font-size: 12pt;">{{ sponsor_text }}</p>
-      </div>
-      {%- endif %}
-      {%- if sponsors is defined %}
-      <div style="display: flex; flex-direction: row; gap: 5px; flex-wrap: wrap; margin-bottom: 20px">
-        {%- for sponsor in sponsors %}
-        <a href="{{ sponsor.url }}" style="color: inherit; text-decoration: none">
-          <img alt="{{ sponsor.alt }}" moz-do-not-send="true" style="max-width: {% if max_width is defined %}{{ max_width }}px{% else %}none{% endif %}; width: {% if sponsor.width is defined %}{{ sponsor.width }}px{% else %}auto{% endif %}; height: {% if sponsor.height is defined %}{{ sponsor.height }}px{% else %}auto{% endif %}; display: flex; align-items: center; justify-content: center" {% if sponsor.width is defined %}width="{{ sponsor.width }}"{% endif %} {% if sponsor.height is defined %}height="{{ sponsor.height }}"{% endif %} src="{{ sponsor.image }}" />
-        </a>&nbsp;
-        {%- endfor %}
-      </div>
-      {%- endif %}
-      {%- if supporter_text is defined %}
-      <div style="margin-bottom: 10px">
-        <p style="margin: 0; font-size: 12pt;">{{ supporter_text }}</p>
-      </div>
-      {%- endif %}
-      {%- if supporters is defined %}
-      <div style="display: flex; flex-direction: row; gap: 5px; flex-wrap: wrap; margin-bottom: 20px">
-        {%- for supporter in supporters %}
-        <a href="{{ supporter.url }}" style="color: inherit; text-decoration: none">
-          <img alt="{{ supporter.alt }}" moz-do-not-send="true" style="max-width: {% if max_width is defined %}{{ max_width }}px{% else %}none{% endif %}; width: {% if supporter.width is defined %}{{ supporter.width }}px{% else %}auto{% endif %}; height: {% if supporter.height is defined %}{{ supporter.height }}px{% else %}auto{% endif %}; display: flex; align-items: center; justify-content: center" {% if supporter.width is defined %}width="{{ supporter.width }}"{% endif %} {% if supporter.height is defined %}height="{{ supporter.height }}"{% endif %} src="{{ supporter.image }}" />
-        </a>&nbsp;
-        {%- endfor %}
-      </div>
-      {%- endif %}
-      {%- if footer_address is defined or footer_text is defined %}
-      <footer style="font-size: 8pt">
-        {%- if footer_address is defined %}
-        <b style="color: {{ color }}">{{ footer_address }}</b>
-        {%- endif %}
-        {%- if footer_text is defined %}
-        <p style="color: dimgray">{{ footer_text }}</p>
-        {%- endif %}
-      </footer>
-      {%- endif %}
-    </div>
-  </body>
-</html>
+{%- extends "templates/_base.html.j2" -%}
+
+{%- block body_style %}; margin-top: 10px{% endblock -%}
+
+{%- block header %}
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px">
+                    <tr>
+                      <td style="vertical-align: middle; padding-right: 10px">
+                        {{ name_image_block(name_image, organization, size=55, rounded=true) | indent(24) }}
+                      </td>
+                      <td style="vertical-align: middle; font-size: 16pt; font-family: '{{ name_font }}', sans-serif">
+                        <strong>{{ name }}</strong>
+                      </td>
+                    </tr>
+                  </table>
+                  <div style="height: 4px; background-color: {{ color | lower }}; border-radius: 10px; margin-bottom: 10px" aria-hidden="true"></div>
+{%- endblock -%}
+
+{%- block content %}
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 20px">
+                    <tr>
+                      <td>
+                        <p style="margin: 0"><strong>{{ position }}</strong></p>
+                        <p style="margin: 0">{{ organization }}</p>
+                        <br />
+                        {{ contact_info(phone, phone_country_code, internal_phone, mail, opt_mail) | indent(24) }}
+                        {%- if organization_extra is defined %}
+                        <br />
+                        <p style="margin: 0"><em>{{ organization_extra }}</em></p>
+                        {%- endif %}
+                      </td>
+                    </tr>
+                  </table>
+{%- endblock %}
