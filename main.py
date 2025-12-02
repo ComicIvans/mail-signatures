@@ -380,15 +380,17 @@ def generate_readme(config: dict[str, Any], files: list[tuple[str, str, str]]) -
     date = datetime.now().strftime("%Y-%m-%d")
 
     # Calcular anchos de columna para alineación
+    max_name = max(len(name) for name, _, _ in files) if files else 5
     max_position = max(len(position) for _, position, _ in files) if files else 5
     max_file = max(len(file) for _, _, file in files) if files else 7
+    max_name = max(max_name, 5)  # Mínimo "Nombre"
     max_position = max(max_position, 5)  # Mínimo "Cargo"
     max_file = max(max_file, 7)  # Mínimo "Archivo"
 
     # Generar filas de la tabla con enlaces Markdown
     rows = "\n".join(
-        f"| {position.ljust(max_position)} | {f'[{file}](./{file})'.ljust(max_file)} |"
-        for _, position, file in files
+        f"| {name.ljust(max_name)} | {position.ljust(max_position)} | {f'[{file}](./{file})'.ljust(max_file)} |"
+        for name, position, file in files
     )
 
     return f"""# Firmas de {config_id}
@@ -399,8 +401,8 @@ Firmas de correo electrónico generadas automáticamente para {organization}.
 
 ## Lista de firmas
 
-| {"Cargo".ljust(max_position)} | {"Archivo".ljust(max_file)} |
-| {"-" * max_position} | {"-" * max_file} |
+| {"Nombre".ljust(max_name)} | {"Cargo".ljust(max_position)} | {"Archivo".ljust(max_file)} |
+| {"-" * max_name} | {"-" * max_position} | {"-" * max_file} |
 {rows}
 
 ## ¿Cómo usar las firmas?
