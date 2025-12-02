@@ -385,9 +385,9 @@ def generate_readme(config: dict[str, Any], files: list[tuple[str, str, str]]) -
     max_position = max(max_position, 5)  # Mínimo "Cargo"
     max_file = max(max_file, 7)  # Mínimo "Archivo"
 
-    # Generar filas de la tabla
+    # Generar filas de la tabla con enlaces Markdown
     rows = "\n".join(
-        f"| {position.ljust(max_position)} | {file.ljust(max_file)} |"
+        f"| {position.ljust(max_position)} | {f'[{file}](./{file})'.ljust(max_file)} |"
         for _, position, file in files
     )
 
