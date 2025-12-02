@@ -2,7 +2,7 @@
 
 Firmas de correo electrónico generadas automáticamente para Coordinadora de Representantes de Estudiantes de Universidades Públicas.
 
-**Última actualización:** 2025-11-29
+**Última actualización:** 2025-12-02
 
 ## Lista de firmas
 
@@ -10,10 +10,10 @@ Firmas de correo electrónico generadas automáticamente para Coordinadora de Re
 | -------------------------------------------------- | ---------------- |
 | Presidente                                         | Presidencia.html |
 | Secretario                                         | Secretaría.html  |
-| Tesorera                                           | Tesorería.html   |
-| Vicepresidente de Relaciones Institucionales       | VPRI.html        |
-| Vicepresidente de Política Universitaria           | VPPU.html        |
+| Tesorero en funciones                              | Tesorería.html   |
+| Vicepresidenta de Política Universitaria           | VPPU.html        |
 | Vicepresidenta de Organización                     | VPO.html         |
+| Vicepresidenta de Coordinación Interna y Formación | VPCIF.html       |
 | Directora de Comunicación                          | DIRCOM.html      |
 | Vocal de Relaciones Internacionales                | VRI.html         |
 | Vocal de Igualdad y Cooperación al Desarrollo      | VICD.html        |
