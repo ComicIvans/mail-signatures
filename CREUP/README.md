@@ -14,7 +14,7 @@ Firmas de correo electrónico generadas automáticamente para Coordinadora de Re
 | Elena García Lleó                  | Vicepresidenta de Política Universitaria           | [VPPU.html](./VPPU.html) |
 | Lorena Villalba Gómez              | Vicepresidenta de Organización                     | [VPO.html](./VPO.html) |
 | Carla Sosa Rivero                  | Vicepresidenta de Coordinación Interna y Formación | [VPCIF.html](./VPCIF.html) |
-| María de los Ángeles Guzmán Moreno | Directora de Comunicación                          | [DIRCOM.html](./DIRCOM.html) |
+| María de los Ángeles Guzmán Moreno | Vicepresidenta de Comunicación y Difusión          | [VPCD.html](./VPCD.html) |
 | Ainhoa Serrano Rodríguez           | Vocal de Relaciones Internacionales                | [VRI.html](./VRI.html) |
 | Marta Díaz Gómez                   | Vocal de Igualdad y Cooperación al Desarrollo      | [VICD.html](./VICD.html) |
 | Iván Salido Cobo                   | Vocal de Digitalización y Transparencia            | [VDT.html](./VDT.html) |
