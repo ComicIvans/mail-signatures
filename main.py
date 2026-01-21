@@ -250,6 +250,50 @@ def validate_template(template_name: str, templates_dir: Path) -> bool:
     return True
 
 
+def validate_unique_outputs(
+    signatures_list: list[list[str]], cols: dict[str, int]
+) -> tuple[bool, list[str]]:
+    """
+    Verifica que no haya valores repetidos en la columna 'output'.
+
+    Args:
+        signatures_list: Lista de firmas (incluyendo cabeceras).
+        cols: Diccionario de columnas.
+
+    Returns:
+        Tupla (válido, lista_de_errores).
+    """
+    if "output" not in cols:
+        return True, []
+
+    output_col = cols["output"]
+    seen_outputs: dict[str, list[int]] = {}
+    errors = []
+
+    # Iterar sobre las filas de datos (sin la cabecera)
+    for i, row in enumerate(signatures_list[1:]):
+        if output_col < len(row):
+            output_val = row[output_col].strip() if row[output_col] else f"signature{i}"
+        else:
+            output_val = f"signature{i}"
+
+        if output_val:
+            if output_val not in seen_outputs:
+                seen_outputs[output_val] = []
+            seen_outputs[output_val].append(
+                i + 2
+            )  # +2 porque i es del 0, y queremos filas del 1 (header)
+
+    # Detectar duplicados
+    for output_val, row_numbers in seen_outputs.items():
+        if len(row_numbers) > 1:
+            errors.append(
+                f"Nombre duplicado '{output_val}' encontrado en filas: {', '.join(map(str, row_numbers))}"
+            )
+
+    return len(errors) == 0, errors
+
+
 def gen_signatures(
     config: dict[str, Any],
     signatures_list: list[list[str]],
@@ -285,6 +329,14 @@ def gen_signatures(
     # Crear diccionario de columnas sin modificar la lista original
     header_row = signatures_list[0]
     cols = {value.lower().strip(): index for index, value in enumerate(header_row)}
+
+    # Validar que no haya valores repetidos en la columna 'output'
+    valid_outputs, output_errors = validate_unique_outputs(signatures_list, cols)
+    if not valid_outputs:
+        logger.error("Hay varias firmas con el mismo nombre de archivo de salida:")
+        for error in output_errors:
+            logger.error("  - %s", error)
+        return 0
 
     output_path = Path(config["output_path"])
     output_path.mkdir(parents=True, exist_ok=True)

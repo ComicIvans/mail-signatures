@@ -2,7 +2,7 @@
 
 Firmas de correo electrónico generadas automáticamente para Coordinadora de Representantes de Estudiantes de Universidades Públicas.
 
-**Última actualización:** 2025-12-10
+**Última actualización:** 2026-01-21
 
 ## Lista de firmas
 
@@ -33,6 +33,9 @@ Firmas de correo electrónico generadas automáticamente para Coordinadora de Re
 | Mario Fuentes Martín               | Coordinador del Comité de Asuntos Sectoriales      | [CCAS.html](./CCAS.html) |
 | Jonay Jesús Rodríguez Medina       | Secretario del Comité de Asuntos Sectoriales       | [SCAS.html](./SCAS.html) |
 | Ainhoa García Marcos               | Coordinadora del Comité de Asuntos Internacionales | [CCAI.html](./CCAI.html) |
+| Gonzalo Rivera Cueva               | Vocal de Asuntos Económicos                        | [VAE.html](./VAE.html) |
+| Chaimaa El Mahi Afargi             | Vocal de Proyectos y Patrocinios                   | [VP.html](./VP.html) |
+| Pere Miquel Marbà Recasens         | Vocal de Bienestar                                 | [VB.html](./VB.html) |
 
 ## ¿Cómo usar las firmas?
 
