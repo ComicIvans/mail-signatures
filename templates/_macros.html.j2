@@ -5,7 +5,7 @@
 {% macro social_link(link, size=35) -%}
 {%- set has_alt = link.alt is defined and link.alt -%}
 {%- set has_desc = link.description is defined and link.description -%}
-<a href="{{ link.url }}"{% if has_desc %} title="{{ link.description }}" aria-label="{{ link.description }}"{% endif %} style="border-radius: 50%; color: inherit; text-decoration: none; margin: 0 5px 5px 0; min-width: {{ size }}px; min-height: {{ size }}px; display: inline-block; text-align: center; vertical-align: middle; background-color: white; font-weight: bold; font-size: 14pt"><img{% if has_alt %} alt="{{ link.alt }}"{% endif %} aria-hidden="true" moz-do-not-send="true" style="font-size: 16pt; max-width: {{ size }}px; max-height: {{ size }}px; display: block" height="{{ size }}" width="{{ size }}" src="{{ link.image }}" /></a>
+<a href="{{ link.url }}"{% if has_desc %} title="{{ link.description }}" aria-label="{{ link.description }}"{% endif %} style="border-radius: 50%; color: inherit; text-decoration: none; margin: 0 5px 5px 0; width: {{ size }}px; height: {{ size }}px; display: inline-block; text-align: center; vertical-align: middle; background-color: white; font-weight: bold; font-size: 14pt"><img{% if has_alt %} alt="{{ link.alt }}"{% endif %}{% if has_desc %} aria-hidden="true"{% endif %} moz-do-not-send="true" style="font-size: 16pt; width: {{ size }}px; height: {{ size }}px; display: block" height="{{ size }}" width="{{ size }}" src="{{ link.image }}" /></a>
 {%- endmacro %}
 
 {#- Barra de enlaces sociales -#}
