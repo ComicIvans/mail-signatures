@@ -262,7 +262,7 @@
     "main_font": "Raleway",
     "name_font": "Red Rose",
     "name_image": {
-      "image": "https://www.creup.es/documentos/imagen/firmas/CREUP.png",
+      "image": "https://static.creup.es/email-signatures/CREUP.png",
       "description": "Logo de CREUP"
     },
     "color": "#792225",
@@ -271,31 +271,31 @@
     "links": [
       {
         "url": "https://www.creup.es",
-        "image": "https://www.creup.es/documentos/imagen/firmas/Web.png",
+        "image": "https://static.creup.es/email-signatures/Web.png",
         "alt": "🌐",
         "description": "Sitio web de CREUP"
       },
       {
         "url": "https://www.instagram.com/creupcreup",
-        "image": "https://www.creup.es/documentos/imagen/firmas/Instagram.png",
+        "image": "https://static.creup.es/email-signatures/Instagram.png",
         "alt": "📷",
         "description": "Instagram de CREUP"
       },
       {
         "url": "https://x.com/creupcreup",
-        "image": "https://www.creup.es/documentos/imagen/firmas/X.png",
+        "image": "https://static.creup.es/email-signatures/X.png",
         "alt": "X",
         "description": "X (Twitter) de CREUP"
       },
       {
         "url": "https://t.me/CREUP",
-        "image": "https://www.creup.es/documentos/imagen/firmas/Telegram.png",
+        "image": "https://static.creup.es/email-signatures/Telegram.png",
         "alt": "💬",
         "description": "Canal de Telegram de CREUP"
       },
       {
         "url": "https://www.linkedin.com/company/creup",
-        "image": "https://www.creup.es/documentos/imagen/firmas/Linkedin.png",
+        "image": "https://static.creup.es/email-signatures/Linkedin.png",
         "alt": "🎓",
         "description": "LinkedIn de CREUP"
       }
