@@ -8,7 +8,7 @@ Aquí también se guardarán todas las firmas HTML que vaya haciendo para los co
 - [Delegación General de Estudiantes (DGE)](https://dge.ugr.es)
 - [Asociación de Estudiantes de Matemáticas y Estadística de la UGR (AMAT)](https://amatugr.es)
 - [Coordinadora de Representantes de Estudiantes de Universidades Públicas (CREUP)](https://www.creup.es)
-- [XXVI Encuentro Nacional de Estudiantes de Matemáticas (ENEM)](https://enem.anem.es/2025)
+- [XXVI Encuentro Nacional de Estudiantes de Matemáticas (ENEM)](https://enem.anem.es/2025) _(edición de 2025, histórica)_
 
 Las firmas partieron de una base que supongo que será de @jesusjmma y, actualmente, utilizan iconos de [Tabler Icons](https://tabler-icons.io)
 
@@ -24,6 +24,7 @@ Las firmas partieron de una base que supongo que será de @jesusjmma y, actualme
 - ✅ Compatibilidad mejorada con clientes de correo (uso de tablas HTML)
 - ✅ Macros reutilizables para componentes comunes
 - ✅ Accesibilidad mejorada (ARIA, textos alternativos, semántica)
+- ✅ Escapado automático de datos de usuario (autoescape de Jinja2)
 
 ---
 
@@ -256,7 +257,9 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
 | `supporter_text`     | ❌           | Texto sobre los colaboradores                          |
 | `supporters`         | ❌           | Lista de colaboradores                                 |
 | `footer_address`     | ❌           | Dirección postal                                       |
-| `footer_text`        | ❌           | Texto legal del footer                                 |
+| `footer_text`        | ❌           | Texto legal del footer (admite HTML, ver nota)         |
+
+> **Nota sobre HTML y escapado:** los valores se escapan automáticamente (autoescape de Jinja2) para evitar romper el HTML o inyectar marcado con caracteres como `&`, `<` o `>`. La única excepción es `footer_text`, que se renderiza como HTML sin escapar para permitir enlaces (`<a>`) y saltos de línea (`<br>`) en los textos legales.
 
 #### Formato de `name_image`
 
@@ -309,6 +312,8 @@ Debe ser un objeto con las propiedades de la imagen:
 
 Una vez esté la configuración definida hay que crear la lista de firmas a generar, que es un archivo CSV (por defecto `{id en minúsculas}_list.csv`, ej: `enem_list.csv`).
 
+> **Plantilla:** el archivo [`signatures_list.csv`](signatures_list.csv) contiene solo la fila de cabeceras y sirve como plantilla de partida para crear nuevas listas: cópialo, renómbralo a `{id}_list.csv` y rellena las filas.
+
 #### Columnas obligatorias
 
 ```csv
@@ -324,6 +329,8 @@ output,phone,phone_country_code,internal_phone,opt_mail,organization_extra,main_
 ```
 
 > **Nota:** Usa `None` en una celda para eliminar un valor opcional de la configuración general para esa firma específica.
+>
+> **Nota:** la columna `name_image` se acepta en la cabecera por compatibilidad, pero **se ignora**: al ser un objeto (no un texto) no puede construirse desde una celda CSV. Defínela solo en `signatures.json`.
 
 #### Ejemplo de CSV
 

@@ -13,7 +13,7 @@
     <meta name="github" content="https://github.com/ComicIvans/mail-signatures" />
     <meta name="last-modified" content="{{ date }}" />
     <meta name="icons-source" content="https://tabler-icons.io/" />
-    <title></title>
+    <title>{{ name }} - {{ organization }}</title>
   </head>
   <body style="margin: 8px; padding: 0">
     <div>
@@ -27,10 +27,10 @@
           }
         </style>
       <![endif]-->
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family: '{{ main_font }}', sans-serif; font-size: 10pt{% if max_width is defined %}; max-width: {{ max_width }}px{% endif %}{%- block body_style %}{% endblock %}">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family: '{{ main_font }}', sans-serif; font-size: 10pt{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}{%- block body_style %}{% endblock %}">
         <tr>
           <td>
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width: fit-content{% if max_width is defined %}; max-width: {{ max_width }}px{% endif %}">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width: fit-content{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}">
               <tr>
                 <td>
 {%- block header %}{% endblock %}

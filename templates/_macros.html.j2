@@ -64,7 +64,7 @@
 {%- if footer_text is defined %}
   <tr>
     <td>
-      <p style="color: dimgray; margin: 5px 0 0 0">{{ footer_text }}</p>
+      <p style="color: dimgray; margin: 5px 0 0 0">{{ footer_text | safe }}</p>
     </td>
   </tr>
 {%- endif %}

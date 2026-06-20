@@ -18,7 +18,12 @@ from pathlib import Path
 from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
-from schemas import is_config, is_signatures_list, validate_all_rows
+from schemas import (
+    IGNORED_OVERRIDE_COLUMNS,
+    is_config,
+    is_signatures_list,
+    validate_all_rows,
+)
 
 
 # Configuración del logging
@@ -213,7 +218,7 @@ def load_signatures_list(
         return None
 
     # Validar filas obligatorias
-    cols, errors = validate_all_rows(signatures_list)
+    _, errors = validate_all_rows(signatures_list)
     if errors:
         for error in errors:
             logger.error(error)
@@ -318,7 +323,10 @@ def gen_signatures(
         return 0
 
     template_path = f"templates/{template_name}.html.j2"
-    env = Environment(loader=FileSystemLoader("."))
+    # autoescape activado para escapar datos de usuario (CSV/JSON) y evitar
+    # romper el HTML o inyectar marcado. Los campos con HTML intencionado
+    # (p. ej. footer_text) usan el filtro `| safe` en la plantilla.
+    env = Environment(loader=FileSystemLoader("."), autoescape=True)
 
     try:
         template = env.get_template(template_path)
@@ -357,6 +365,8 @@ def gen_signatures(
 
         # Aplicar valores del CSV
         for col, idx in cols.items():
+            if col in IGNORED_OVERRIDE_COLUMNS:
+                continue
             if idx < len(row):
                 val = row[idx]
                 if isinstance(val, str):

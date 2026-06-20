@@ -12,7 +12,7 @@ HEX_COLOR_REGEX = re.compile(r"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
 # Regex para validar URLs (básica)
 URL_REGEX = re.compile(
     r"^https?://"  # http:// o https://
-    r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}\.?|"  # dominio
+    r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,}\.?|"  # dominio
     r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"  # IP
     r"(?::\d+)?"  # puerto opcional
     r"(?:/?|[/?]\S+)$",
@@ -91,6 +91,9 @@ REQ_COLUMNS_SIGNATURES_LIST: list[str] = [
     "mail",
 ]
 
+# `name_image` se acepta como columna por compatibilidad, pero se ignora al
+# generar: es un objeto en la configuración y no puede construirse desde una
+# celda CSV (texto plano). Defínelo solo en `signatures.json`.
 OPT_COLUMNS_SIGNATURES_LIST: list[str] = [
     "output",
     "phone",
@@ -105,6 +108,10 @@ OPT_COLUMNS_SIGNATURES_LIST: list[str] = [
     "color",
     "organization",
 ]
+
+# Columnas que se aceptan en la cabecera pero se ignoran al aplicar overrides
+# (no pueden representarse como texto plano en una celda CSV).
+IGNORED_OVERRIDE_COLUMNS: frozenset[str] = frozenset({"name_image"})
 
 S_SIGNATURES_LIST = Schema(
     And(
