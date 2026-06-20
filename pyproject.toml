@@ -13,3 +13,12 @@ dependencies = [
 
 [project.scripts]
 mail-signatures = "main:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
