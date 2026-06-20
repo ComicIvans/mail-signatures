@@ -2,7 +2,7 @@
 
 Firmas de correo electrónico generadas automáticamente para Coordinadora de Representantes de Estudiantes de Universidades Públicas.
 
-**Última actualización:** 2026-01-21
+**Última actualización:** 2026-06-20
 
 ## Lista de firmas
 

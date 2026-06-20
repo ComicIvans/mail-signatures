@@ -100,6 +100,14 @@ No olvidar tampoco cambiar los «Valores predeterminados de firma» a la firma r
 
 ![Captura de pantalla de la firma y los ajustes de Gmail](img/gmail.png)
 
+### En Outlook
+
+El procedimiento es igual que en Gmail. Primero hay que abrir en el navegador el archivo HTML de la firma, seleccionarlo todo con <kbd>Ctrl</kbd> + <kbd>A</kbd> y copiarlo con <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+
+Luego, en Outlook, hay que ir a los ajustes, al apartado «Cuenta» → «Firmas», crear una firma nueva y pegarla en el editor con <kbd>Ctrl</kbd> + <kbd>V</kbd>.
+
+![Captura de pantalla de la firma y los ajustes de Outlook](img/outlook.png)
+
 ### En Webmail
 
 El archivo de firma es un HTML y tiene la siguiente estructura:
