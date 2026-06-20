@@ -1,89 +1,101 @@
 """Schemas y validación para la configuración y lista de firmas."""
 
-import re
-from typing import Any
+from __future__ import annotations
 
-from schema import Schema, Optional, And, Or, SchemaError, Regex
+import re
+from typing import Annotated, Any
+
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    HttpUrl,
+    ValidationError,
+    field_validator,
+)
 
 
 # Regex para validar colores hexadecimales
 HEX_COLOR_REGEX = re.compile(r"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
 
-# Regex para validar URLs (básica)
-URL_REGEX = re.compile(
-    r"^https?://"  # http:// o https://
-    r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,}\.?|"  # dominio
-    r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"  # IP
-    r"(?::\d+)?"  # puerto opcional
-    r"(?:/?|[/?]\S+)$",
-    re.IGNORECASE,
-)
+# Tipos reutilizables
+NonEmptyStr = Annotated[str, Field(min_length=1)]
+PositiveNumber = Annotated[float, Field(gt=0)]
 
 
-def is_hex_color(value: str) -> bool:
-    """Valida que el valor sea un color hexadecimal válido."""
-    return bool(HEX_COLOR_REGEX.match(value))
+class _StrictModel(BaseModel):
+    """Modelo base que rechaza claves desconocidas."""
+
+    model_config = ConfigDict(extra="forbid")
 
 
-def is_url(value: str) -> bool:
-    """Valida que el valor sea una URL válida."""
-    return bool(URL_REGEX.match(value))
+class LinkModel(_StrictModel):
+    url: HttpUrl
+    image: HttpUrl
+    alt: str | None = None
+    description: str | None = None
 
 
-S_LINK = Schema(
-    {
-        "url": And(str, is_url),
-        "image": And(str, is_url),
-        Optional("alt"): str,
-        Optional("description"): str,
-    }
-)
+class SponsorModel(_StrictModel):
+    image: HttpUrl
+    url: HttpUrl | None = None
+    alt: str | None = None
+    description: str | None = None
+    width: PositiveNumber | None = None
+    height: PositiveNumber | None = None
 
-S_SPONSOR = Schema(
-    {
-        Optional("url"): And(str, is_url),
-        "image": And(str, is_url),
-        Optional("alt"): str,
-        Optional("description"): str,
-        Optional("width"): And(Or(int, float), lambda x: x > 0),
-        Optional("height"): And(Or(int, float), lambda x: x > 0),
-    }
-)
 
-S_NAME_IMAGE = Schema(
-    {  # Objeto con propiedades de la imagen
-        "image": And(str, is_url),
-        Optional("url"): And(str, is_url),
-        Optional("alt"): str,
-        Optional("description"): str,
-    }
-)
+class NameImageModel(_StrictModel):
+    image: HttpUrl
+    url: HttpUrl | None = None
+    alt: str | None = None
+    description: str | None = None
 
-S_CONFIG = Schema(
-    {
-        "id": And(str, len),
-        "template": And(str, len),
-        Optional("output_path"): str,
-        "main_font": And(str, len),
-        "name_font": And(str, len),
-        "name_image": S_NAME_IMAGE,
-        "color": And(str, is_hex_color),
-        "organization": And(str, len),
-        Optional("organization_extra"): str,
-        Optional("phone"): str,
-        Optional("phone_country_code"): And(str, lambda x: x.startswith("+")),
-        Optional("internal_phone"): str,
-        Optional("opt_mail"): And(str, lambda x: "@" in x),
-        Optional("max_width"): And(Or(int, float), lambda x: x > 0),
-        Optional("links"): [S_LINK],
-        Optional("sponsor_text"): str,
-        Optional("sponsors"): [S_SPONSOR],
-        Optional("supporter_text"): str,
-        Optional("supporters"): [S_SPONSOR],
-        Optional("footer_address"): str,
-        Optional("footer_text"): str,
-    }
-)
+
+class ConfigModel(_StrictModel):
+    id: NonEmptyStr
+    template: NonEmptyStr
+    output_path: str | None = None
+    main_font: NonEmptyStr
+    name_font: NonEmptyStr
+    name_image: NameImageModel
+    color: str
+    organization: NonEmptyStr
+    organization_extra: str | None = None
+    phone: str | None = None
+    phone_country_code: str | None = None
+    internal_phone: str | None = None
+    opt_mail: str | None = None
+    max_width: PositiveNumber | None = None
+    links: list[LinkModel] | None = None
+    sponsor_text: str | None = None
+    sponsors: list[SponsorModel] | None = None
+    supporter_text: str | None = None
+    supporters: list[SponsorModel] | None = None
+    footer_address: str | None = None
+    footer_text: str | None = None
+
+    @field_validator("color")
+    @classmethod
+    def _validate_color(cls, value: str) -> str:
+        if not HEX_COLOR_REGEX.match(value):
+            raise ValueError("debe ser un color hexadecimal válido (ej: #3EB1C8)")
+        return value
+
+    @field_validator("phone_country_code")
+    @classmethod
+    def _validate_country_code(cls, value: str | None) -> str | None:
+        if value is not None and not value.startswith("+"):
+            raise ValueError("debe empezar por '+'")
+        return value
+
+    @field_validator("opt_mail")
+    @classmethod
+    def _validate_opt_mail(cls, value: str | None) -> str | None:
+        if value is not None and "@" not in value:
+            raise ValueError("debe contener '@'")
+        return value
+
 
 REQ_COLUMNS_SIGNATURES_LIST: list[str] = [
     "name",
@@ -113,20 +125,17 @@ OPT_COLUMNS_SIGNATURES_LIST: list[str] = [
 # (no pueden representarse como texto plano en una celda CSV).
 IGNORED_OVERRIDE_COLUMNS: frozenset[str] = frozenset({"name_image"})
 
-S_SIGNATURES_LIST = Schema(
-    And(
-        REQ_COLUMNS_SIGNATURES_LIST + OPT_COLUMNS_SIGNATURES_LIST,
-        lambda cols: set(REQ_COLUMNS_SIGNATURES_LIST).issubset(set(cols)),
-    )
+_ALLOWED_COLUMNS: frozenset[str] = frozenset(
+    REQ_COLUMNS_SIGNATURES_LIST + OPT_COLUMNS_SIGNATURES_LIST
 )
 
 
 def is_config(config: dict[str, Any]) -> bool:
     """Valida que la configuración tenga el formato correcto."""
     try:
-        S_CONFIG.validate(config)
+        ConfigModel.model_validate(config)
         return True
-    except SchemaError:
+    except ValidationError:
         return False
 
 
@@ -135,11 +144,9 @@ def is_signatures_list(signatures_list: list[list[str]]) -> bool:
     if not signatures_list or not signatures_list[0]:
         return False
     cols = [col.lower().strip() for col in signatures_list[0]]
-    try:
-        S_SIGNATURES_LIST.validate(cols)
-        return True
-    except SchemaError:
+    if not set(REQ_COLUMNS_SIGNATURES_LIST).issubset(cols):
         return False
+    return set(cols).issubset(_ALLOWED_COLUMNS)
 
 
 def validate_signature_row(
