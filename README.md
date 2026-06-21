@@ -243,31 +243,59 @@ Lo primero que debes hacer es asegurarte de que tienes definida la configuració
 
 ### Campos de configuración
 
-| Campo                | Obligatorio | Descripción                                            |
-| -------------------- | ----------- | ------------------------------------------------------ |
-| `id`                 | ✅           | Identificador de la configuración                      |
-| `template`           | ✅           | Plantilla a usar: `original` o `wide-logo`             |
-| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)               |
-| `main_font`          | ✅           | Fuente principal del texto                             |
-| `name_font`          | ✅           | Fuente del nombre de la persona                        |
-| `name_image`         | ✅           | Objeto `{image, url?, alt?, description?}` (ver abajo) |
-| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                      |
-| `organization`       | ✅           | Nombre de la organización                              |
-| `organization_extra` | ❌           | Organización superior/adicional                        |
-| `phone`              | ❌           | Número de teléfono (sin código de país)                |
-| `phone_country_code` | ❌           | Código de país (ej: `+34`)                             |
-| `internal_phone`     | ❌           | Extensión interna                                      |
-| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono)      |
-| `max_width`          | ❌           | Ancho máximo en píxeles                                |
-| `links`              | ❌           | Lista de enlaces sociales                              |
-| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                         |
-| `sponsors`           | ❌           | Lista de patrocinadores                                |
-| `supporter_text`     | ❌           | Texto sobre los colaboradores                          |
-| `supporters`         | ❌           | Lista de colaboradores                                 |
-| `footer_address`     | ❌           | Dirección postal                                       |
-| `footer_text`        | ❌           | Texto legal del footer (admite HTML, ver nota)         |
+| Campo                | Obligatorio | Descripción                                                                                                                                               |
+| -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                 | ✅           | Identificador de la configuración                                                                                                                         |
+| `template`           | ✅           | Plantilla a usar: `original`, `wide-logo` o `upv`                                                                                                         |
+| `output_path`        | ❌           | Carpeta de salida (por defecto usa `id`)                                                                                                                  |
+| `main_font`          | ✅           | Fuente principal del texto. Puede ser una sola familia o una cadena con respaldos (ej: `Helvetica Neue, Helvetica, Arial`)                                |
+| `name_font`          | ❌           | Fuente del nombre de la persona. Si falta, se usa `main_font`. Admite también una cadena con respaldos                                                    |
+| `name_image`         | ❌           | Objeto `{image, url?, alt?, description?}` (ver abajo). En `original`/`wide-logo` es el logo de la organización; en `upv` es la foto personal por defecto |
+| `color`              | ✅           | Color hexadecimal (ej: `#3EB1C8`)                                                                                                                         |
+| `organization`       | ✅           | Nombre de la organización                                                                                                                                 |
+| `organization_extra` | ❌           | Organización superior/adicional                                                                                                                           |
+| `phone`              | ❌           | Número de teléfono (sin código de país)                                                                                                                   |
+| `phone_country_code` | ❌           | Código de país (ej: `+34`)                                                                                                                                |
+| `internal_phone`     | ❌           | Extensión interna                                                                                                                                         |
+| `opt_mail`           | ❌           | Email alternativo (se muestra si no hay teléfono)                                                                                                         |
+| `max_width`          | ❌           | Ancho máximo de la firma en píxeles (máximo `440`)                                                                                                        |
+| `links`              | ❌           | Lista de enlaces sociales                                                                                                                                 |
+| `sponsor_text`       | ❌           | Texto sobre los patrocinadores                                                                                                                            |
+| `sponsors`           | ❌           | Lista de patrocinadores                                                                                                                                   |
+| `supporter_text`     | ❌           | Texto sobre los colaboradores                                                                                                                             |
+| `supporters`         | ❌           | Lista de colaboradores                                                                                                                                    |
+| `footer_address`     | ❌           | Dirección postal                                                                                                                                          |
+| `footer_text`        | ❌           | Texto legal del footer (admite HTML, ver nota)                                                                                                            |
+
+Campos específicos de la plantilla `upv` (todos opcionales):
+
+| Campo                     | Descripción                                                                                                                                                                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `photo`                   | URL de la foto personal (círculo izquierdo). Suele indicarse por persona en el CSV; si falta, se usa `name_image`                                                                                                                     |
+| `organization_logo`       | Objeto logo `{image, url?, alt?, width?, height?}` de la organización (arriba a la derecha, alineado a la izquierda, sobre las redes). Se limita a **140px de ancho y 50px de alto** como máximo (se reescala manteniendo proporción) |
+| `organization_extra_logo` | Objeto logo `{image, url?, alt?, width?, height?}` de la organización superior (abajo a la derecha, ej: el logo de la UPV). Su `width` (140 por defecto) define el ancho sobre el que se reparten las redes                           |
+| `contact_height`          | Altura en píxeles de la columna de logos (por defecto `122`). El bloque de contacto reparte su espaciado para llenar esa altura y alinear la última línea con el pie del logo; ajústala si cambias el tamaño de los logos             |
+| `website_url`             | URL de la página web que se muestra en el bloque de contacto                                                                                                                                                                          |
+| `website_text`            | Texto visible del enlace web (por defecto se muestra la propia URL)                                                                                                                                                                   |
+| `location`                | Texto de ubicación (ej: `Edificio 4K`)                                                                                                                                                                                                |
+| `location_url`            | URL del enlace de la ubicación (ej: plano del campus)                                                                                                                                                                                 |
+| `location_icon`           | URL del icono que precede a la ubicación (ej: un marcador de mapa)                                                                                                                                                                    |
+
+En la cabecera de `upv`, bajo el nombre van dos líneas en negrita: `position` (cargo) y `organization` (unidad); `position` se muestra tal cual, sin partirse. La línea inferior del bloque de contacto muestra `organization_extra` (o `organization` si no está).
+
+Distribución de imágenes en `upv`: a la **izquierda** la foto personal (`photo`/`name_image`, círculo); a la **derecha**, de arriba a abajo, el logo de la organización (`organization_logo`), las redes sociales (`links`) y el logo de la organización superior (`organization_extra_logo`).
+
+**Iconos de redes en `upv`:** se muestran planos (no como avatar redondo), con **alto fijo** y ancho automático, sobre el ancho del logo de la organización superior (`organization_extra_logo.width`, 140 por defecto):
+
+- Si hay `organization_logo`: alto **13px**, hasta **5 por línea**.
+- Si no: alto **15px**, hasta **4 por línea**.
+- Una línea de 4 o más iconos se reparte a lo largo del ancho; una de 3 o menos se alinea a la izquierda. La separación mínima entre iconos es de **10px**. Los iconos que sobren pasan a una nueva línea con las mismas reglas.
+
+> **Nota:** si no hay foto (`photo` ni `name_image`), la firma se renderiza sin ese hueco (el contacto queda alineado a la izquierda).
 
 > **Nota sobre HTML y escapado:** los valores se escapan automáticamente (autoescape de Jinja2) para evitar romper el HTML o inyectar marcado con caracteres como `&`, `<` o `>`. La única excepción es `footer_text`, que se renderiza como HTML sin escapar para permitir enlaces (`<a>`) y saltos de línea (`<br>`) en los textos legales.
+
+> **Nota sobre imágenes:** los campos de imagen (`image`, `photo`, `location_icon`) aceptan una URL `http(s)` o una **ruta local relativa al HTML generado** (ej: `img/CEUPV.png`, sirviendo las imágenes desde `{output_path}/img/`). Otros esquemas (`data:`, `file:`, `javascript:`, …) se rechazan. Los campos de enlace (`url`, `website_url`, `location_url`) deben ser siempre URLs `http(s)`.
 
 #### Formato de `name_image`
 
@@ -284,7 +312,7 @@ Debe ser un objeto con las propiedades de la imagen:
 
 | Campo         | Obligatorio | Descripción                                    |
 | ------------- | ----------- | ---------------------------------------------- |
-| `image`       | ✅           | URL de la imagen                               |
+| `image`       | ✅           | URL http(s) o ruta local de la imagen          |
 | `url`         | ❌           | URL del enlace (si hay, la imagen es clicable) |
 | `alt`         | ❌           | Texto alternativo (por defecto: 👤)             |
 | `description` | ❌           | Descripción (se usa en title y aria-label)     |
@@ -294,7 +322,7 @@ Debe ser un objeto con las propiedades de la imagen:
 | Campo         | Obligatorio | Descripción                                |
 | ------------- | ----------- | ------------------------------------------ |
 | `url`         | ✅           | URL del enlace                             |
-| `image`       | ✅           | URL del icono                              |
+| `image`       | ✅           | URL http(s) o ruta local del icono         |
 | `alt`         | ❌           | Texto alternativo (emoji recomendado)      |
 | `description` | ❌           | Descripción (se usa en title y aria-label) |
 
@@ -303,7 +331,7 @@ Debe ser un objeto con las propiedades de la imagen:
 | Campo         | Obligatorio | Descripción                                |
 | ------------- | ----------- | ------------------------------------------ |
 | `url`         | ❌           | URL del enlace (si no hay, no es clicable) |
-| `image`       | ✅           | URL del logo                               |
+| `image`       | ✅           | URL http(s) o ruta local del logo          |
 | `alt`         | ❌           | Texto alternativo                          |
 | `description` | ❌           | Descripción (se usa en title y aria-label) |
 | `width`       | ❌           | Ancho en píxeles                           |
@@ -311,10 +339,29 @@ Debe ser un objeto con las propiedades de la imagen:
 
 ### Plantillas disponibles
 
-| Plantilla   | Descripción                                                |
-| ----------- | ---------------------------------------------------------- |
-| `original`  | Diseño clásico con imagen circular y barra horizontal      |
-| `wide-logo` | Logo ancho arriba con barra vertical al lado del contenido |
+| Plantilla   | Descripción                                                                                                                                                                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `original`  | Diseño clásico con imagen circular y barra horizontal                                                                                                                                                                                        |
+| `wide-logo` | Logo ancho arriba con barra vertical al lado del contenido                                                                                                                                                                                   |
+| `upv`       | Estilo institucional UPV: nombre y cargo arriba con barra horizontal; foto personal opcional a la izquierda; contacto en el centro; a la derecha, logo de la organización sobre las redes sociales sobre el logo de la organización superior |
+
+#### Campos que renderiza cada plantilla
+
+La **obligatoriedad de los campos es la misma para todas las plantillas** (se define en el esquema, no por plantilla): solo `id`, `template`, `main_font`, `color` y `organization` son obligatorios; el resto son opcionales. Lo que cambia es **qué campos dibuja** cada plantilla según su diseño:
+
+| Campo                                                                                                                                  |       `original`        |       `wide-logo`       |       `upv`       |
+| -------------------------------------------------------------------------------------------------------------------------------------- | :---------------------: | :---------------------: | :---------------: |
+| `name`, `position`, `organization`, `color`, fuentes, `max_width`                                                                      |            ✅            |            ✅            |         ✅         |
+| `phone` / `internal_phone`, `mail`, `links`                                                                                            |            ✅            |            ✅            |         ✅         |
+| `sponsors` / `supporters`, `footer_address` / `footer_text`                                                                            |            ✅            |            ✅            |         ✅         |
+| `organization_extra`                                                                                                                   |            ✅            |            ✅            |         ✅         |
+| `opt_mail`                                                                                                                             |            ✅            |            ✅            |         ✅         |
+| `name_image`                                                                                                                           | logo de la organización | logo de la organización | **foto personal** |
+| `photo`, `organization_logo`, `organization_extra_logo`, `website_url` / `website_text`, `location` / `location_url` / `location_icon` |            ❌            |            ❌            |         ✅         |
+
+> **`name_image`** cambia de significado según la plantilla: en `original`/`wide-logo` es el logo de la organización; en `upv` es la foto personal por defecto (que la columna `photo` del CSV puede sobrescribir por persona).
+>
+> Los campos de la última fila son propios del diseño institucional de `upv`; si se definen en una configuración con plantilla `original`/`wide-logo` se ignoran (no rompen nada).
 
 ### Lista de firmas (CSV)
 
@@ -333,8 +380,10 @@ name,position,mail
 Estas columnas, si tienen valor, sobrescriben la configuración general:
 
 ```csv
-output,phone,phone_country_code,internal_phone,opt_mail,organization_extra,main_font,name_font,max_width,name_image,color,organization
+output,phone,phone_country_code,internal_phone,opt_mail,organization_extra,main_font,name_font,max_width,name_image,color,organization,photo,website_url,website_text,location,location_url,location_icon
 ```
+
+> **Nota:** las columnas `photo`, `website_url`, `website_text`, `location`, `location_url` y `location_icon` solo las usa la plantilla `upv`. `photo` (la foto personal) suele indicarse por persona en el CSV. Los logos `organization_logo`/`organization_extra_logo` son objetos y solo se definen en `signatures.json`.
 
 > **Nota:** Usa `None` en una celda para eliminar un valor opcional de la configuración general para esa firma específica.
 >
@@ -395,7 +444,8 @@ mail-signatures/
 │   ├── _base.html.j2    # Plantilla base con estructura común
 │   ├── _macros.html.j2  # Macros reutilizables
 │   ├── original.html.j2 # Plantilla clásica
-│   └── wide-logo.html.j2# Plantilla con logo ancho
+│   ├── wide-logo.html.j2# Plantilla con logo ancho
+│   └── upv.html.j2      # Plantilla institucional UPV
 └── {OUTPUT}/            # Firmas generadas por organización
 ```
 

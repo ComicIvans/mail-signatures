@@ -8,7 +8,7 @@
                       <td style="vertical-align: middle; padding-right: 10px">
                         {{ name_image_block(name_image, organization, size=55, rounded=true) | indent(24) }}
                       </td>
-                      <td style="vertical-align: middle; font-size: 16pt; font-family: '{{ name_font }}', sans-serif">
+                      <td style="vertical-align: middle; font-size: 16pt; font-family: '{{ name_font if (name_font is defined and name_font) else main_font }}', sans-serif">
                         <strong>{{ name }}</strong>
                       </td>
                     </tr>

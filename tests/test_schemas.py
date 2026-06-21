@@ -69,10 +69,16 @@ def test_short_hex_color(valid_config: dict) -> None:
     assert is_config(valid_config)
 
 
-@pytest.mark.parametrize("missing", ["id", "template", "main_font", "name_image", "color", "organization"])
+@pytest.mark.parametrize("missing", ["id", "template", "main_font", "color", "organization"])
 def test_missing_required_field(valid_config: dict, missing: str) -> None:
     del valid_config[missing]
     assert not is_config(valid_config)
+
+
+def test_name_image_is_optional(valid_config: dict) -> None:
+    # En la plantilla `upv` la foto puede faltar; name_image es opcional.
+    del valid_config["name_image"]
+    assert is_config(valid_config)
 
 
 def test_unknown_key_rejected(valid_config: dict) -> None:
@@ -96,8 +102,21 @@ def test_opt_mail_must_contain_at(valid_config: dict) -> None:
     assert not is_config(valid_config)
 
 
-def test_invalid_url_rejected(valid_config: dict) -> None:
-    valid_config["name_image"] = {"image": "not-a-url"}
+def test_invalid_http_image_url_rejected(valid_config: dict) -> None:
+    # Una URL http(s) mal formada sigue siendo inválida.
+    valid_config["name_image"] = {"image": "https://"}
+    assert not is_config(valid_config)
+
+
+def test_local_image_path_accepted(valid_config: dict) -> None:
+    # Las imágenes pueden servirse desde una ruta local relativa.
+    valid_config["name_image"] = {"image": "img/logo.png"}
+    assert is_config(valid_config)
+
+
+@pytest.mark.parametrize("ref", ["javascript:alert(1)", "data:image/png;base64,AAAA", "file:///etc/passwd"])
+def test_unsafe_image_scheme_rejected(valid_config: dict, ref: str) -> None:
+    valid_config["name_image"] = {"image": ref}
     assert not is_config(valid_config)
 
 
@@ -109,6 +128,13 @@ def test_empty_required_string_rejected(valid_config: dict) -> None:
 @pytest.mark.parametrize("value", [0, -5])
 def test_non_positive_max_width_rejected(valid_config: dict, value: int) -> None:
     valid_config["max_width"] = value
+    assert not is_config(valid_config)
+
+
+def test_max_width_upper_bound(valid_config: dict) -> None:
+    valid_config["max_width"] = 440
+    assert is_config(valid_config)
+    valid_config["max_width"] = 441
     assert not is_config(valid_config)
 
 

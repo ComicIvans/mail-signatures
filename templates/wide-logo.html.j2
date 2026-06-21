@@ -16,7 +16,7 @@
                       <td width="4" bgcolor="{{ color | lower }}" style="width: 4px; min-width: 4px; background-color: {{ color | lower }}; border-radius: 10px; font-size: 0; line-height: 0" aria-hidden="true">&nbsp;</td>
                       <td width="10" style="width: 10px; font-size: 0; line-height: 0">&nbsp;</td>
                       <td style="vertical-align: top">
-                        <p style="margin: 0; font-family: '{{ name_font }}', sans-serif; font-size: 16pt"><strong>{{ name }}</strong></p>
+                        <p style="margin: 0; font-family: '{{ name_font if (name_font is defined and name_font) else main_font }}', sans-serif; font-size: 16pt"><strong>{{ name }}</strong></p>
                         <p style="margin: 0; font-size: 12pt"><strong>{{ position }}</strong></p>
                         <p style="margin: 0">{{ organization }}</p>
                         <br />

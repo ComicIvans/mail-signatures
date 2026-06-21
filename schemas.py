@@ -6,10 +6,12 @@ import re
 from typing import Annotated, Any
 
 from pydantic import (
+    AfterValidator,
     BaseModel,
     ConfigDict,
     Field,
     HttpUrl,
+    TypeAdapter,
     ValidationError,
     field_validator,
 )
@@ -18,9 +20,36 @@ from pydantic import (
 # Regex para validar colores hexadecimales
 HEX_COLOR_REGEX = re.compile(r"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
 
+# Detecta el esquema de una URI (p. ej. `http:`, `data:`, `javascript:`).
+_SCHEME_REGEX = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.\-]*:")
+_HTTP_URL_ADAPTER = TypeAdapter(HttpUrl)
+
+
+def _validate_image_ref(value: str) -> str:
+    """Acepta una URL http(s) válida o una ruta de imagen local (relativa).
+
+    Las imágenes pueden servirse desde una URL o desde un archivo junto a la
+    firma generada. Los esquemas distintos de http/https (data:, file:,
+    javascript:, …) se rechazan por seguridad.
+    """
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError("debe ser una URL http(s) o una ruta de imagen no vacía")
+    ref = value.strip()
+    if _SCHEME_REGEX.match(ref):
+        scheme = ref.split(":", 1)[0].lower()
+        if scheme not in ("http", "https"):
+            raise ValueError(f"esquema de imagen no permitido: {scheme}")
+        _HTTP_URL_ADAPTER.validate_python(ref)
+    return ref
+
+
 # Tipos reutilizables
 NonEmptyStr = Annotated[str, Field(min_length=1)]
 PositiveNumber = Annotated[float, Field(gt=0)]
+# Ancho máximo de la firma: positivo y como mucho 440px.
+MaxWidth = Annotated[float, Field(gt=0, le=440)]
+# Referencia a una imagen: URL http(s) o ruta local relativa al HTML generado.
+ImageRef = Annotated[str, AfterValidator(_validate_image_ref)]
 
 
 class _StrictModel(BaseModel):
@@ -31,13 +60,13 @@ class _StrictModel(BaseModel):
 
 class LinkModel(_StrictModel):
     url: HttpUrl
-    image: HttpUrl
+    image: ImageRef
     alt: str | None = None
     description: str | None = None
 
 
 class SponsorModel(_StrictModel):
-    image: HttpUrl
+    image: ImageRef
     url: HttpUrl | None = None
     alt: str | None = None
     description: str | None = None
@@ -46,10 +75,19 @@ class SponsorModel(_StrictModel):
 
 
 class NameImageModel(_StrictModel):
-    image: HttpUrl
+    image: ImageRef
     url: HttpUrl | None = None
     alt: str | None = None
     description: str | None = None
+
+
+class LogoModel(_StrictModel):
+    image: ImageRef
+    url: HttpUrl | None = None
+    alt: str | None = None
+    description: str | None = None
+    width: PositiveNumber | None = None
+    height: PositiveNumber | None = None
 
 
 class ConfigModel(_StrictModel):
@@ -57,8 +95,12 @@ class ConfigModel(_StrictModel):
     template: NonEmptyStr
     output_path: str | None = None
     main_font: NonEmptyStr
-    name_font: NonEmptyStr
-    name_image: NameImageModel
+    # Opcional: si falta, las plantillas usan `main_font` para el nombre.
+    name_font: NonEmptyStr | None = None
+    # En la plantilla `upv`, `name_image` es la foto personal (círculo izquierdo);
+    # en `original`/`wide-logo` es el logo de la organización. Opcional porque la
+    # foto puede faltar (entonces no se muestra el círculo).
+    name_image: NameImageModel | None = None
     color: str
     organization: NonEmptyStr
     organization_extra: str | None = None
@@ -66,7 +108,18 @@ class ConfigModel(_StrictModel):
     phone_country_code: str | None = None
     internal_phone: str | None = None
     opt_mail: str | None = None
-    max_width: PositiveNumber | None = None
+    max_width: MaxWidth | None = None
+    # Plantilla `upv`: foto personal (por persona, vía CSV), logos de la
+    # organización y de la organización superior, web y ubicación. Opcionales.
+    photo: ImageRef | None = None
+    organization_logo: LogoModel | None = None
+    organization_extra_logo: LogoModel | None = None
+    contact_height: PositiveNumber | None = None
+    website_url: HttpUrl | None = None
+    website_text: str | None = None
+    location: str | None = None
+    location_url: HttpUrl | None = None
+    location_icon: ImageRef | None = None
     links: list[LinkModel] | None = None
     sponsor_text: str | None = None
     sponsors: list[SponsorModel] | None = None
@@ -119,6 +172,12 @@ OPT_COLUMNS_SIGNATURES_LIST: list[str] = [
     "name_image",
     "color",
     "organization",
+    "photo",
+    "website_url",
+    "website_text",
+    "location",
+    "location_url",
+    "location_icon",
 ]
 
 # Columnas que se aceptan en la cabecera pero se ignoran al aplicar overrides

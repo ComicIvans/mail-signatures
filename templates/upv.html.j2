@@ -1,0 +1,159 @@
+{%- extends "templates/_base.html.j2" -%}
+
+{#- Logo de organización. Modo normal: ancho fijo (`logo.width` o `default_width`)
+    y alto automático. Si se pasan `max_w`/`max_h` (modo cap), el ancho objetivo se
+    aplica como `max-width` (acotado a `max_w`) junto con `max-height`, y las
+    dimensiones van en auto, de modo que la imagen se reescala manteniendo la
+    proporción para no superar la caja (sin distorsionarse). -#}
+{%- macro render_logo(logo, default_width, fallback_alt, max_w=none, max_h=none) -%}
+{%- if logo is defined and logo -%}
+{%- set lw = logo.width if logo.width is defined and logo.width else default_width -%}
+{%- set lalt = logo.alt if logo.alt is defined and logo.alt else fallback_alt -%}
+{%- set cap = max_w or max_h -%}
+{%- set cap_w = (lw if not max_w else (lw if lw < max_w else max_w)) -%}
+{%- set istyle = ("max-width: " ~ cap_w ~ "px;" ~ (" max-height: " ~ max_h ~ "px;" if max_h else "") ~ " width: auto; height: auto; display: block") if cap else ("width: " ~ lw ~ "px; height: auto; display: block") -%}
+{%- if logo.url is defined and logo.url -%}
+<a href="{{ logo.url }}" style="color: inherit; text-decoration: none; display: inline-block"><img alt="{{ lalt }}" moz-do-not-send="true"{% if not cap %} width="{{ lw }}"{% endif %} style="{{ istyle }}" src="{{ logo.image }}" /></a>
+{%- else -%}
+<img alt="{{ lalt }}" moz-do-not-send="true"{% if not cap %} width="{{ lw }}"{% endif %} style="{{ istyle }}" src="{{ logo.image }}" />
+{%- endif -%}
+{%- endif -%}
+{%- endmacro -%}
+
+{#- Rejilla de iconos de redes sociales (estilo plano, alto fijo `size`px y ancho
+    automático). En filas de hasta `per_line`: una fila de 4 o más se reparte a lo
+    largo de `width` (primero pegado a la izquierda, último a la derecha); una de 3
+    o menos se alinea a la izquierda con `min_gap` de separación. El sobrante pasa
+    a una nueva fila con las mismas reglas. Se usan celdas separadoras al 100% para
+    repartir sin depender de los anchos concretos de cada icono. -#}
+{%- macro social_icons(links, size, width, per_line, min_gap) -%}
+{%- for row in links | batch(per_line) %}
+{%- set distribute = (row | length) >= 4 %}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width: {{ width }}px{% if not loop.first %}; margin-top: {{ min_gap }}px{% endif %}">
+  <tr>
+{%- for link in row -%}
+{%- set has_desc = link.description is defined and link.description -%}
+{%- set has_alt = link.alt is defined and link.alt -%}
+    <td style="font-size: 0; line-height: 0{% if not distribute and not loop.last %}; padding-right: {{ min_gap }}px{% endif %}"><a href="{{ link.url }}"{% if has_desc %} title="{{ link.description }}" aria-label="{{ link.description }}"{% endif %} style="text-decoration: none"><img{% if has_alt %} alt="{{ link.alt }}"{% endif %}{% if has_desc %} aria-hidden="true"{% endif %} moz-do-not-send="true" height="{{ size }}" style="display: block; height: {{ size }}px; width: auto" src="{{ link.image }}" /></a></td>
+{%- if distribute and not loop.last %}<td aria-hidden="true" style="font-size: 0; line-height: 0; width: 100%">&nbsp;</td>{% endif %}
+{%- endfor %}
+{%- if not distribute %}<td aria-hidden="true" style="font-size: 0; line-height: 0; width: 100%">&nbsp;</td>{% endif %}
+  </tr>
+</table>
+{%- endfor %}
+{%- endmacro -%}
+
+{#- `main_font`/`name_font` pueden ser una sola fuente o una cadena con
+    respaldos (ej: "Helvetica Neue, Helvetica, Arial"); por eso no se entrecomillan.
+    `name_font` cae a `main_font` si no se define. -#}
+{%- block body_style %}; margin-top: 10px; font-family: {{ main_font }}, sans-serif{% endblock -%}
+
+{%- block header %}
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; margin-bottom: 8px{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}">
+                    <tr>
+                      <td style="font-family: {{ name_font if (name_font is defined and name_font) else main_font }}, sans-serif; font-size: 11pt; color: #555555">{{ name }}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 11pt; padding-top: 2px; color: #5A5A5A"><strong>{{ position }}</strong></td>
+                    </tr>
+{%- if organization is defined and organization %}
+                    <tr>
+                      <td style="font-size: 11pt; padding-top: 0px; color: #5A5A5A"><strong>{{ organization }}</strong></td>
+                    </tr>
+{%- endif %}
+                  </table>
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; margin-bottom: 12px{% if max_width is defined and max_width %}; max-width: {{ max_width }}px{% endif %}" aria-hidden="true">
+                    <tr>
+                      <td height="4" style="height: 4px; line-height: 4px; mso-line-height-rule: exactly; font-size: 0; background-color: {{ color | lower }}">&nbsp;</td>
+                    </tr>
+                  </table>
+{%- endblock -%}
+
+{%- block content %}
+{%- set photo_src = photo if (photo is defined and photo) else (name_image.image if name_image is defined and name_image else none) %}
+{%- set org_line = organization_extra if organization_extra is defined and organization_extra else organization %}
+{#- Distribución vertical del contacto: el bloque se reparte para que la última
+    línea (organización) quede alineada con el pie del logo. `contact_height` es
+    la altura de la columna derecha (logos); el hueco entre grupos se calcula
+    como (altura - contenido) / nº de huecos, así se reparte igual sea cual sea
+    el número de líneas presentes. Alturas de línea explícitas para que el
+    cálculo sea determinista (margen inline -> robusto en cualquier cliente). -#}
+{%- set lh = 18 -%}
+{%- set lh_loc = 20 -%}
+{%- set lh_org = 16 -%}
+{%- set target = contact_height if (contact_height is defined and contact_height) else 122 -%}
+{%- set contact_lines = 1 + (1 if (opt_mail is defined and opt_mail) else 0) + (1 if (phone is defined and phone) else 0) + (1 if (phone is defined and phone and internal_phone is defined and internal_phone) else 0) -%}
+{%- set ns = namespace(content = contact_lines * lh + lh_org, groups = 2) -%}
+{%- if website_url is defined and website_url -%}{%- set ns.content = ns.content + lh -%}{%- set ns.groups = ns.groups + 1 -%}{%- endif -%}
+{%- if location is defined and location -%}{%- set ns.content = ns.content + lh_loc -%}{%- set ns.groups = ns.groups + 1 -%}{%- endif -%}
+{%- set raw_gap = (target - ns.content) / (ns.groups - 1) if ns.groups > 1 else 0 -%}
+{%- set gap = (raw_gap if raw_gap > 2 else 2) | round(1) -%}
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px">
+                    <tr>
+{%- if photo_src %}
+                      <td style="vertical-align: top; padding-right: 29px">
+                        {{ name_image_block({"image": photo_src, "alt": "Foto de " ~ name}, organization, size=75, rounded=true) | indent(24) }}
+                      </td>
+{%- endif %}
+                      <td style="vertical-align: top">
+                        <p style="margin: 0; line-height: {{ lh }}px"><a href="mailto:{{ mail }}" style="color: #515151; text-decoration: none"><strong>{{ mail }}</strong></a></p>
+{%- if opt_mail is defined and opt_mail %}
+                        <p style="margin: 0; line-height: {{ lh }}px"><a href="mailto:{{ opt_mail }}" style="color: #515151; text-decoration: none"><strong>{{ opt_mail }}</strong></a></p>
+{%- endif %}
+{%- if phone is defined and phone %}
+                        <p style="margin: 0; line-height: {{ lh }}px; color: #515151">Tel. <a href="tel:{{ phone_country_code }}{{ phone | replace(' ', '') }}" style="color: #515151; text-decoration: none">{{ phone }}</a></p>
+{%- if internal_phone is defined and internal_phone %}
+                        <p style="margin: 0; line-height: {{ lh }}px; color: #515151">Ext. {{ internal_phone }}</p>
+{%- endif %}
+{%- endif %}
+{%- if website_url is defined and website_url %}
+                        <p style="margin: {{ gap }}px 0 0 0; line-height: {{ lh }}px"><a href="{{ website_url }}" style="color: #515151; text-decoration: none"><strong>{{ website_text if website_text is defined and website_text else website_url }}</strong></a></p>
+{%- endif %}
+{%- if location is defined and location %}
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: {{ gap }}px 0 0 0">
+                          <tr style="height: {{ lh_loc }}px">
+{%- if location_icon is defined and location_icon %}
+                            <td style="vertical-align: bottom"><img alt="" aria-hidden="true" moz-do-not-send="true" width="10" height="15" style="width: 10px; height: 15px; display: block" src="{{ location_icon }}" /></td>
+                            <td style="vertical-align: bottom; padding-left: 5px; color: #515151">{% if location_url is defined and location_url %}<a href="{{ location_url }}" style="color: #515151; text-decoration: none">{{ location }}</a>{% else %}{{ location }}{% endif %}</td>
+{%- else %}
+                            <td style="vertical-align: bottom; color: #515151">{% if location_url is defined and location_url %}<a href="{{ location_url }}" style="color: #515151; text-decoration: none">{{ location }}</a>{% else %}{{ location }}{% endif %}</td>
+{%- endif %}
+                          </tr>
+                        </table>
+{%- endif %}
+                        <p style="margin: {{ gap }}px 0 0 0; line-height: {{ lh_org }}px; font-size: 9pt">{{ org_line }}</p>
+                      </td>
+{%- set logo_w = organization_extra_logo.width if (organization_extra_logo is defined and organization_extra_logo and organization_extra_logo.width is defined and organization_extra_logo.width) else 140 %}
+{%- set has_org_logo = organization_logo is defined and organization_logo %}
+{%- set icon_size = 13 if has_org_logo else 15 %}
+{%- set per_line = 5 if has_org_logo else 4 %}
+                      <td style="vertical-align: top; padding-left: 29px; text-align: right">
+                        <table role="presentation" align="right" cellpadding="0" cellspacing="0" border="0">
+{%- if has_org_logo %}
+                          <tr>
+                            <td style="text-align: left; font-size: 0; line-height: 0; padding-bottom: 12px">
+                              {{ render_logo(organization_logo, 90, organization, max_w=140, max_h=50) | indent(30) }}
+                            </td>
+                          </tr>
+{%- endif %}
+{%- if links is defined and links %}
+                          <tr>
+                            <td style="padding-bottom: 12px">
+                              {{ social_icons(links, icon_size, logo_w, per_line, 10) | indent(30) }}
+                            </td>
+                          </tr>
+{%- endif %}
+{%- if organization_extra_logo is defined and organization_extra_logo %}
+                          <tr>
+                            <td style="text-align: right">
+                              {{ render_logo(organization_extra_logo, logo_w, org_line) | indent(30) }}
+                            </td>
+                          </tr>
+{%- endif %}
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+{%- endblock -%}
+
+{%- block links %}{% endblock -%}
