@@ -9,6 +9,7 @@ Aquí también se guardarán todas las firmas HTML que vaya haciendo para los co
 - [Asociación de Estudiantes de Matemáticas y Estadística de la UGR (AMAT)](https://amatugr.es)
 - [Coordinadora de Representantes de Estudiantes de Universidades Públicas (CREUP)](https://www.creup.es)
 - [XXVI Encuentro Nacional de Estudiantes de Matemáticas (ENEM)](https://enem.anem.es/2025) _(edición de 2025, histórica)_
+- [Consell d'Estudiants UPV (CEUPV)](https://ceupv.es)
 
 Las firmas partieron de una base que supongo que será de @jesusjmma y, actualmente, utilizan iconos de [Tabler Icons](https://tabler-icons.io)
 
@@ -81,6 +82,16 @@ Cuando los iconos cargan, la firma se debería de ver así:
 Y cuando no cargan, así:
 
 ![Firma de Iván Salido Cobo como Secretario y Tesorero del XXVI ENEM en la que los iconos no cargan](img/enem-no-icons.png)
+
+### Ejemplo de firma del CEUPV
+
+Cuando los iconos cargan, la firma se debería de ver así:
+
+![Firma de Iván Salido Cobo como Coordinador de Infraestructuras Digitales del CEUPV en la que los iconos cargan](img/ceupv.png)
+
+Y cuando no cargan, así:
+
+![Firma de Iván Salido Cobo como Coordinador de Infraestructuras Digitales del CEUPV en la que los iconos no cargan](img/ceupv-no-icons.png)
 
 ## Cómo usar las firmas
 
@@ -274,6 +285,8 @@ Campos específicos de la plantilla `upv` (todos opcionales):
 | `photo`                   | URL de la foto personal (círculo izquierdo). Suele indicarse por persona en el CSV; si falta, se usa `name_image`                                                                                                                     |
 | `organization_logo`       | Objeto logo `{image, url?, alt?, width?, height?}` de la organización (arriba a la derecha, alineado a la izquierda, sobre las redes). Se limita a **140px de ancho y 50px de alto** como máximo (se reescala manteniendo proporción) |
 | `organization_extra_logo` | Objeto logo `{image, url?, alt?, width?, height?}` de la organización superior (abajo a la derecha, ej: el logo de la UPV). Su `width` (140 por defecto) define el ancho sobre el que se reparten las redes                           |
+
+> **Resiliencia ante imágenes que no cargan:** define **`width` y `height`** en los logos para que se reserve el hueco y se muestre el texto alternativo (`alt`) cuando la imagen no se descarga. Si solo das `width`, el alto va automático y el hueco se colapsa si la imagen falla. Los iconos de redes y la foto ya llevan dimensiones fijas.
 | `contact_height`          | Altura en píxeles de la columna de logos (por defecto `122`). El bloque de contacto reparte su espaciado para llenar esa altura y alinear la última línea con el pie del logo; ajústala si cambias el tamaño de los logos             |
 | `website_url`             | URL de la página web que se muestra en el bloque de contacto                                                                                                                                                                          |
 | `website_text`            | Texto visible del enlace web (por defecto se muestra la propia URL)                                                                                                                                                                   |

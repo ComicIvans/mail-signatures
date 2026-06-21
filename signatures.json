@@ -315,13 +315,15 @@
       "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/067fa9efb3a63a818f377eabc2987acf27c3907a/CEUPV/img/CEUPV.png",
       "url": "https://www.ceupv.es/",
       "alt": "Consell d'Estudiants UPV",
-      "width": 140
+      "width": 140,
+      "height": 41
     },
     "organization_extra_logo": {
       "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/067fa9efb3a63a818f377eabc2987acf27c3907a/CEUPV/img/UPV.png",
       "url": "https://www.upv.es/",
       "alt": "Universitat Politècnica de València",
-      "width": 140
+      "width": 140,
+      "height": 49
     },
     "phone_country_code": "+34",
     "contact_height": 127,
