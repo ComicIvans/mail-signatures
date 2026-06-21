@@ -326,7 +326,8 @@
       "height": 49
     },
     "phone_country_code": "+34",
-    "contact_height": 127,
+    "contact_height": 163,
+    "contact_width": 150,
     "website_url": "https://ceupv.es/",
     "website_text": "ceupv.es",
     "location": "Edificio 4K",
@@ -344,6 +345,12 @@
         "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/067fa9efb3a63a818f377eabc2987acf27c3907a/CEUPV/img/Linkedin.png",
         "alt": "🎓",
         "description": "LinkedIn del CEUPV"
+      },
+      {
+        "url": "https://www.tiktok.com/@ceupv",
+        "image": "https://raw.githubusercontent.com/ComicIvans/mail-signatures/66f2ec142d40ecdf0a582ba54d76c78c45676618/CEUPV/img/Tiktok.png",
+        "alt": "🎵",
+        "description": "TikTok del CEUPV"
       }
     ]
   }

@@ -115,6 +115,7 @@ class ConfigModel(_StrictModel):
     organization_logo: LogoModel | None = None
     organization_extra_logo: LogoModel | None = None
     contact_height: PositiveNumber | None = None
+    contact_width: PositiveNumber | None = None
     website_url: HttpUrl | None = None
     website_text: str | None = None
     location: str | None = None

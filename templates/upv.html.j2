@@ -82,11 +82,12 @@
 {%- set lh_org = 16 -%}
 {%- set target = contact_height if (contact_height is defined and contact_height) else 122 -%}
 {%- set contact_lines = 1 + (1 if (opt_mail is defined and opt_mail) else 0) + (1 if (phone is defined and phone) else 0) + (1 if (phone is defined and phone and internal_phone is defined and internal_phone) else 0) -%}
-{%- set ns = namespace(content = contact_lines * lh + lh_org, groups = 2) -%}
+{%- set org_lines = 2 if (contact_width is defined and contact_width) else 1 -%}
+{%- set ns = namespace(content = contact_lines * lh + lh_org * org_lines, groups = 2) -%}
 {%- if website_url is defined and website_url -%}{%- set ns.content = ns.content + lh -%}{%- set ns.groups = ns.groups + 1 -%}{%- endif -%}
 {%- if location is defined and location -%}{%- set ns.content = ns.content + lh_loc -%}{%- set ns.groups = ns.groups + 1 -%}{%- endif -%}
 {%- set raw_gap = (target - ns.content) / (ns.groups - 1) if ns.groups > 1 else 0 -%}
-{%- set gap = (raw_gap if raw_gap > 2 else 2) | round(1) -%}
+{%- set gap = (raw_gap if raw_gap > 10 else 10) | round(1) -%}
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px">
                     <tr>
 {%- if photo_src %}
@@ -94,7 +95,7 @@
                         {{ name_image_block({"image": photo_src, "alt": "Foto de " ~ name}, organization, size=75, rounded=true) | indent(24) }}
                       </td>
 {%- endif %}
-                      <td style="vertical-align: top">
+                      <td style="vertical-align: top{% if contact_width is defined and contact_width %}; width: {{ contact_width }}px{% endif %}">
                         <p style="margin: 0; line-height: {{ lh }}px"><a href="mailto:{{ mail }}" style="color: #515151; text-decoration: none"><strong>{{ mail }}</strong></a></p>
 {%- if opt_mail is defined and opt_mail %}
                         <p style="margin: 0; line-height: {{ lh }}px"><a href="mailto:{{ opt_mail }}" style="color: #515151; text-decoration: none"><strong>{{ opt_mail }}</strong></a></p>
@@ -120,7 +121,7 @@
                           </tr>
                         </table>
 {%- endif %}
-                        <p style="margin: {{ gap }}px 0 0 0; line-height: {{ lh_org }}px; font-size: 9pt">{{ org_line }}</p>
+                        <p style="margin: {{ gap }}px 0 0 0; line-height: {{ lh_org }}px; font-size: 9pt"><strong>{{ org_line }}</strong></p>
                       </td>
 {%- set logo_w = organization_extra_logo.width if (organization_extra_logo is defined and organization_extra_logo and organization_extra_logo.width is defined and organization_extra_logo.width) else 140 %}
 {%- set has_org_logo = organization_logo is defined and organization_logo %}
@@ -130,15 +131,15 @@
                         <table role="presentation" align="right" cellpadding="0" cellspacing="0" border="0">
 {%- if has_org_logo %}
                           <tr>
-                            <td style="text-align: left; padding-bottom: 12px">
+                            <td style="text-align: left; padding-bottom: 30px">
                               {{ render_logo(organization_logo, 90, organization, max_w=140, max_h=50) | indent(30) }}
                             </td>
                           </tr>
 {%- endif %}
 {%- if links is defined and links %}
                           <tr>
-                            <td style="padding-bottom: 12px">
-                              {{ social_icons(links, icon_size, logo_w, per_line, 10) | indent(30) }}
+                            <td style="padding-bottom: 30px">
+                              {{ social_icons(links, icon_size, logo_w, per_line, 15) | indent(30) }}
                             </td>
                           </tr>
 {%- endif %}

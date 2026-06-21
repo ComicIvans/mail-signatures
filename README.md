@@ -288,6 +288,7 @@ Campos específicos de la plantilla `upv` (todos opcionales):
 
 > **Resiliencia ante imágenes que no cargan:** define **`width` y `height`** en los logos para que se reserve el hueco y se muestre el texto alternativo (`alt`) cuando la imagen no se descarga. Si solo das `width`, el alto va automático y el hueco se colapsa si la imagen falla. Los iconos de redes y la foto ya llevan dimensiones fijas.
 | `contact_height`          | Altura en píxeles de la columna de logos (por defecto `122`). El bloque de contacto reparte su espaciado para llenar esa altura y alinear la última línea con el pie del logo; ajústala si cambias el tamaño de los logos             |
+| `contact_width`           | Ancho en píxeles del bloque de contacto (sin límite por defecto). Estréchalo para que la línea de la organización (`organization_extra`) parta en dos líneas; al fijarlo se asume que ocupa dos líneas en el reparto vertical          |
 | `website_url`             | URL de la página web que se muestra en el bloque de contacto                                                                                                                                                                          |
 | `website_text`            | Texto visible del enlace web (por defecto se muestra la propia URL)                                                                                                                                                                   |
 | `location`                | Texto de ubicación (ej: `Edificio 4K`)                                                                                                                                                                                                |
@@ -302,7 +303,7 @@ Distribución de imágenes en `upv`: a la **izquierda** la foto personal (`photo
 
 - Si hay `organization_logo`: alto **13px**, hasta **5 por línea**.
 - Si no: alto **15px**, hasta **4 por línea**.
-- Una línea de 4 o más iconos se reparte a lo largo del ancho; una de 3 o menos se alinea a la izquierda. La separación mínima entre iconos es de **10px**. Los iconos que sobren pasan a una nueva línea con las mismas reglas.
+- Una línea de 4 o más iconos se reparte a lo largo del ancho; una de 3 o menos se alinea a la izquierda. La separación mínima entre iconos es de **15px**. Los iconos que sobren pasan a una nueva línea con las mismas reglas.
 
 > **Nota:** si no hay foto (`photo` ni `name_image`), la firma se renderiza sin ese hueco (el contacto queda alineado a la izquierda).
 
